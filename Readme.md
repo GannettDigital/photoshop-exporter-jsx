@@ -1,6 +1,9 @@
 #Configuration-Driven Exports
 ##Icon export script for Adobe Photoshop
 
+###Usage
+From Photoshop, select the script from `File->Scripts->Browse...`, browse to createIcons.jsx, and select OK. Output files based on the configuration will be saved to the folder of the image (TODO: image selection).
+
 ###Configuration Object Syntax
 ```javascript
 {
@@ -38,5 +41,4 @@
 
 
 
-####Based on the work by [John Ballinger](https://twitter.com/sponno),
-who released the original script under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
+Based on the work by [John Ballinger](https://twitter.com/sponno), who released the original script under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
