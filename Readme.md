@@ -43,7 +43,8 @@ From Photoshop, select the script from `File->Scripts->Browse...`, browse to cre
     {"x":58,"y":58,"name":"Icon-29@2x.png"},
     {"x":87,"y":87,"name":"Icon-29@3x.png"}
   ],
-  "confirm":false
+  "confirm":false, //suppress confirmation dialog
+  "outputFolder":"iOS" //create and/or target a folder relative to where the .psd is located
 }
 ```
 
