@@ -15,7 +15,8 @@ var config = {
     {"x":58,"y":58,"name":"Icon-29@2x.png"},
     {"x":87,"y":87,"name":"Icon-29@3x.png"}
   ],
-  "confirm":false
+  "confirm":false,
+  "outputFolder":"iOS"
 }
 
-doResizeAndOutput(location, config);
+doResizeAndOutput(location, config); //iOS

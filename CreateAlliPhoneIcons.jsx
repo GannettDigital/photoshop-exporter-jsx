@@ -40,6 +40,12 @@ function doResizeAndOutput(location, config)
         app.open(file);
 		var path =  file.absoluteURI.substr(0,file.absoluteURI.lastIndexOf("/")+1);
 
+		//get output folder setup
+		var outputFolderPath = (config.outputFolder) ? path+'/'+config.outputFolder : path;
+		var outputFolder = new Folder(outputFolderPath);
+		if(!outputFolder.exists) outputFolder.create();
+
+
 
 	    // Check document resolution
 		if(activeDocument.resolution!=72){
@@ -57,8 +63,9 @@ function doResizeAndOutput(location, config)
 		// Resize icons from largest to smallest - to preserve quality on resizing.
 		// Use configuration for determining x, y and filename.
 		for(var i in config.sizes) {
+
 			activeDocument.resizeImage(null,config.sizes[i].x,config.sizes[i].y,ResampleMethod.BICUBIC);
-			activeDocument.exportDocument(File(path + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
+			activeDocument.exportDocument(File(outputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
 
 			// Undo Resize so we are working with crisp resizing.
 			app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
