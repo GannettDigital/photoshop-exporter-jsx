@@ -48,7 +48,7 @@ function doResizeAndOutput(location, config)
 
 		// export save options
 		var options = new ExportOptionsSaveForWeb();
-				options.includeProfile = true;
+				options.includeProfile = false;
 				options.interlaced = false;
 				options.transparency = true;
 				options.optimized = true;
