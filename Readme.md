@@ -2,7 +2,7 @@
 ##Icon export script for Adobe Photoshop
 
 ###Configuration Object Syntax
-```
+```javascript
 {
   "sizes":[
     {
