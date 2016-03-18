@@ -6,7 +6,7 @@
 - [x] get basic functionality working with config
 - [x] improve documentation
 - [ ] add file/folder selection, and auto-detect
-- [ ] deal with alternate output file paths
+- [x] deal with alternate output file paths
 
 
 ###Usage
