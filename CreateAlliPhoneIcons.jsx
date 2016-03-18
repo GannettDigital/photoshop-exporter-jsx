@@ -30,12 +30,11 @@ app.preferences.typeUnits = TypeUnits.PIXELS;
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 //create a new slideshow package
-function doResizeAndOutput()
+function doResizeAndOutput(location, config)
 {
 
-	   	// Select Icon file
-		// var file = File.openDialog("Select your iPhone icon file, this should be 512 by 512 for best results, your new icon files will be saved here as well.", /\.(jpe|jpg|jpeg|gif|png|tif|tiff|bmp|psd)/i);
-		var file = File("~/Downloads/_TEST/iTunesArtwork.psd"); //hard code a filename
+   	// Select Icon file
+		var file = File(location); //hard code a filename
 
 		if(file == null) return; // cancelled.
         app.open(file);
@@ -47,39 +46,26 @@ function doResizeAndOutput()
 			activeDocument.resizeImage(null,activeDocument.height,72,ResampleMethod.BICUBIC);
 		}
 
-		// Png Save Options
-		var pngOptions = new PNGSaveOptions();
-		pngOptions.interlaced = false;
+		// export save options
+		var options = new ExportOptionsSaveForWeb();
+				options.includeProfile = true;
+				options.interlaced = false;
+				options.transparency = true;
+				options.optimized = true;
+				options.PNG8 = false;
 
 		// Resize icons from largest to smallest - to preserve quality on resizing.
 		// Use configuration for determining x, y and filename.
-
-
-		var config = {
-			"sizes":[
-				{"x":76,"y":76,"name":"Icon-76.png"},
-				{"x":152,"y":152,"name":"Icon-76@2x.png"},
-				{"x":167,"y":167,"name":"Icon-83.5@2x.png"},
-				{"x":120,"y":120,"name":"Icon-60@2x.png"},
-				{"x":180,"y":180,"name":"Icon-60@3x.png"},
-				{"x":40,"y":40,"name":"Icon-40.png"},
-				{"x":80,"y":80,"name":"Icon-40@2x.png"},
-				{"x":120,"y":120,"name":"Icon-40@3x.png"},
-				{"x":29,"y":29,"name":"Icon-29.png"},
-				{"x":58,"y":58,"name":"Icon-29@2x.png"},
-				{"x":87,"y":87,"name":"Icon-29@3x.png"}
-			]
-		}
-
 		for(var i in config.sizes) {
 			activeDocument.resizeImage(null,config.sizes[i].x,config.sizes[i].y,ResampleMethod.BICUBIC);
-			activeDocument.saveAs(File(path + "/"+config.sizes[i].name), pngOptions, true);
+			activeDocument.exportDocument(File(path + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
+
 			// Undo Resize so we are working with crisp resizing.
 			app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
 		}
 		activeDocument.close(SaveOptions.DONOTSAVECHANGES);
-    alert("Done\nAll the new icons have been saved beside your original icons.")
+		if(config.confirm === true) {
+	    alert("Done\nAll the new icons have been saved beside your original icons.")
+		}
 
 }
-//create the slideshow source files
-doResizeAndOutput();
