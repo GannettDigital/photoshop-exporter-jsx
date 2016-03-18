@@ -1,35 +1,5 @@
+#Configuration-Driven Exports
+##Icon export script for Adobe Photoshop
 
-
-PHOTOSHOP - LAYER EXPORT TOOL FOR NORMAL IPHONE GRAPHICS AND RETINA DISPLAY GRAPHICS.  
-
-This script assumes you are working with high resolution graphics for the iPhone Retina display eg 960 x 640
-Select the layer you want to export in the layers list in Photoshop.
-1. Click this script (you might have to right click and choose Open With Photoshop, you can make this the default action in Finder by getting file info)
-2. The script will ask you for the name that you want to save this layer as (without file extension, eg background)
-3. The layer is trimmed of any transparent pixels, saved as name@2x.png and name.png in the same folder as oringal PSD document.          
-
-PHOTHOSHOP EXPORT ALL VISIBLE LAYERS - ExportAllVisibleAsPNGAnd2x.jsx
-This file will export the current document as @2x.png file for retina displays and 1x for normal displays. It will include all visible layers but will be transparent where required.
-If you only want to export the active layer as a trimmed PNG file. Use the ExportActiveLayerAsPNG.jsx file.
-
-PHOTOSHOP - IPHONE APP ICON EXPORT FOR IPHONE 4/3 TOUCH AND IPAD.  
-Creates all 6 icons sizes that are required for these devices from homescreen, retina display, spotlight search       
-
-1. To use this script, double click the script file, photoshop will launch and ask you for a 512x512 icon file of any image format (jpeg, psd, gif, png etc.)
-2. Select the file and photos shop will create 6 icon files and save these with the correct names in the save folder as the 512 image.
-
-3. Add these images into your iPhone project and update you app plist.
-Read Apples Q&Q 1686 on how to add this icons to your info plist
-http://developer.apple.com/iphone/library/qa/qa2010/qa1686.html
-
-PHOTOSHOP - IPHONE APP ICON EXPORT FOR MAC ICONS 
-Quickly creates 512, 256, 128, 32, 16 px icons which can then be used with Icon Composer (found in /Developer/Applications/Utilities/Icon Composer.app)
-Or just spotlight "icon composer" where you can create new ".icns" files.
-
-
-
-Hope you like this script, hit John Ballinger up on Twitter @sponno on from his website www.bluespark.co.nz
-
-Please keep this Attribution here if you are going to redistrubte this code. Thanks
-Creative Commons Attribution 3.0 New Zealand License
-http://creativecommons.org/licenses/by/3.0/nz/
+Based on the work by [John Ballinger](https://twitter.com/sponno),
+who released the original script under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
