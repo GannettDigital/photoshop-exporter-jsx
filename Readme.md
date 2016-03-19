@@ -12,22 +12,25 @@
 ###Usage
 From Photoshop, select the script from `File->Scripts->Browse...`, browse to createIcons.jsx, and select OK. Output files based on the configuration will be saved to the folder of the image (TODO: image selection).
 
-###Configuration Object Syntax
+###Minimal Configuration Object Syntax
+This configuration will save a 76x76 image `called `Icon-76.png` in a folder `./iOS/square` relative to the source psd.
 ```javascript
 {
   "sizes":[
     {
       "x":76,
       "y":76,
-      "name":"Icon-76.png"
+      "name":"Icon-76.png",
+      "subFolder":"square"
     }
     //...
   ],
-  "confirm":true //enable or suppress confirmation dialog at end of script
+  "outputFolder":"iOS" //create and/or target a folder relative to where the .psd is located
 }
 ```
 
 ###Sample Configuration Object for common iOS sizes
+Suppressing confirmation dialog, as well as creating a base output folder only.
 ```javascript
 {
   "sizes":[
