@@ -1,6 +1,13 @@
 #Configuration-Driven Exports
 ##Icon export script for Adobe Photoshop
 
+- Usage
+- Minimal example
+- Simple usage
+- Full configuration spec
+- Todos
+- Credits
+
 ###Usage
 From Photoshop, select the script from `File->Scripts->Browse...`, browse to createIcons.jsx, and select OK. Output files based on the configuration will be saved to the folder of the image (TODO: image selection).
 
@@ -64,7 +71,7 @@ Suppressing confirmation dialog, as well as creating a base output folder only.
 - [x] add file/folder selection, and auto-detect
 - [x] deal with alternate output file paths
 - [ ] Add screenshots to the Readme
-- [ ] Add Table of Contents to the Readme
+- [x] Add Table of Contents to the Readme
 - [ ] Add ability to traverse layers, rather than a file
 - [ ] Consider being able to run a script across an entire folder
 
