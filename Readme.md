@@ -3,8 +3,8 @@
 ##Icon export script for Adobe Photoshop
 
 ###Table of Contents
-- [Usage](#Usage)
-- Minimal example
+- [Usage](#usage)
+- [Minimal example](#minimal-configuration-object-syntax)
 - Simple usage
 - Full configuration spec
 - Todos
