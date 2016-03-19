@@ -1,7 +1,9 @@
 #Configuration-Driven Exports
+
 ##Icon export script for Adobe Photoshop
 
-- Usage
+###Table of Contents
+- [Usage](#Usage)
 - Minimal example
 - Simple usage
 - Full configuration spec
