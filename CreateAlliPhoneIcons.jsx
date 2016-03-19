@@ -34,7 +34,14 @@ function doResizeAndOutput(location, config)
 {
 
    	// Select Icon file
-		var file = File(location); //hard code a filename
+
+		if(typeof location === "object"){
+			//single config object passed, prompt user for file
+			config = location;
+			var file = File.openDialog("Select a file to process.", /\.(jpe|jpg|jpeg|gif|png|tif|tiff|bmp|psd)/i);
+		} else {
+			var file = File(location); //hard code a filename
+		}
 
 		if(file == null) return; // cancelled.
         app.open(file);
