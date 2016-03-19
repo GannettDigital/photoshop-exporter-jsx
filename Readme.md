@@ -64,7 +64,9 @@ Suppressing confirmation dialog, as well as creating a base output folder only.
 - [x] add file/folder selection, and auto-detect
 - [x] deal with alternate output file paths
 - [ ] Add screenshots to the Readme
-- [ ] Add Table of Contents
+- [ ] Add Table of Contents to the Readme
+- [ ] Add ability to traverse layers, rather than a file
+- [ ] Consider being able to run a script across an entire folder
 
 
 Based on the work by [John Ballinger](https://twitter.com/sponno), who released the original script under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
