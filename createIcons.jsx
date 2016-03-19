@@ -1,4 +1,4 @@
-#include "CreateAlliPhoneIcons.jsx"
+#include "lib/CreateAlliPhoneIcons.jsx"
 #include "config-iOS.jsx"
 // #include "config-android.jsx"
 
