@@ -1,14 +1,6 @@
 #Configuration-Driven Exports
 ##Icon export script for Adobe Photoshop
 
-###Todo
-- [x] define config format
-- [x] get basic functionality working with config
-- [x] improve documentation
-- [ ] add file/folder selection, and auto-detect
-- [x] deal with alternate output file paths
-
-
 ###Usage
 From Photoshop, select the script from `File->Scripts->Browse...`, browse to createIcons.jsx, and select OK. Output files based on the configuration will be saved to the folder of the image (TODO: image selection).
 
@@ -27,6 +19,20 @@ This configuration will save a 76x76 image called `Icon-76.png` in a folder `./i
   ],
   "outputFolder":"iOS" //create and/or target a folder relative to where the .psd is located
 }
+```
+
+###Simple example execution script
+If you don't provide the script with an explicit location as the first parameter, a `File Open` dialog will spawn to ask you to select a file.
+```javascript
+#include "CreateAlliPhoneIcons.jsx"
+doResizeAndOutput({
+  "sizes":[
+    {"x":76,"y":76,"name":"Icon-76.png","subFolder":"@1x"},
+    {"x":152,"y":152,"name":"Icon-76@2x.png","subFolder":"@2x"},
+  ],
+  "confirm":false,
+  "outputFolder":"iOS"
+});
 ```
 
 ###Sample Configuration Object for common iOS sizes
@@ -51,6 +57,14 @@ Suppressing confirmation dialog, as well as creating a base output folder only.
 }
 ```
 
+###Todo
+- [x] define config format
+- [x] get basic functionality working with config
+- [x] improve documentation
+- [x] add file/folder selection, and auto-detect
+- [x] deal with alternate output file paths
+- [ ] Add screenshots to the Readme
+- [ ] Add Table of Contents
 
 
 Based on the work by [John Ballinger](https://twitter.com/sponno), who released the original script under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
