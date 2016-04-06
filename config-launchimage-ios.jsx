@@ -6,7 +6,8 @@ var iOSLaunchImage = function() {
       {"x":1800,"y":1800,"name":"LaunchImage@3x.png"}
     ],
     "confirm":false,
-    "outputFolder":"iOS"
+    "outputFolder":"iOS",
+    "traverseLayers":true
   }
   return config;
 }

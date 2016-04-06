@@ -6,7 +6,8 @@ var iOSLogoWhite = function() {
       {"x":510,"y":96,"name":"logo_white@3x.png"}
     ],
     "confirm":false,
-    "outputFolder":"iOS"
+    "outputFolder":"iOS",
+    "traverseLayers":true
   }
   return config;
 }

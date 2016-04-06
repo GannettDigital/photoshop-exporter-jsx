@@ -15,7 +15,8 @@ var iOSiTunesArtwork = function() {
       {"x":1024,"y":1024,"name":"iTunesArtwork.png"}
     ],
     "confirm":false,
-    "outputFolder":"iOS"
+    "outputFolder":"iOS",
+    "traverseLayers":true
   }
   return config;
 }
