@@ -29,6 +29,12 @@ app.preferences.typeUnits = TypeUnits.PIXELS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+var hideAllLayerSets = function(doc) {
+	for(var i =0; i<doc.layerSets.length; i++) {
+		doc.layerSets[i].visible = false;
+	}
+}
+
 //create a new slideshow package
 function doResizeAndOutput(location, config)
 {
@@ -74,6 +80,8 @@ function doResizeAndOutput(location, config)
 			// alert(activeDocument.layerSets[1].visible)
 
 
+
+
 			//loop through layers
 			//set all other layers to hidden
 			//set this layer to visible
@@ -82,8 +90,21 @@ function doResizeAndOutput(location, config)
 			for(var i = 0; i<activeDocument.layerSets.length; i++) {
 				//valid layer names must contain a dash
 				if(activeDocument.layerSets[i].name.indexOf("-")>-1){
+					hideAllLayerSets(activeDocument);
+					activeDocument.layerSets[i].visible = true;
+					var layerName = activeDocument.layerSets[i].name;
 
-					alert(activeDocument.layerSets[i].name)
+					for(var j in config.sizes) {
+						var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+layerName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+layerName;
+						var outputFolder = new Folder(fullOutputFolderPath);
+						if(!outputFolder.exists) outputFolder.create();
+
+						activeDocument.resizeImage(null,config.sizes[j].x,config.sizes[j].y,ResampleMethod.BICUBIC);
+						activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[j].name), ExportType.SAVEFORWEB, options);
+
+						// Undo Resize so we are working with crisp resizing.
+						app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
+					}
 				}
 			}
 			// for( var i = 0; i < obj.artLayers.length; i++) {
@@ -97,21 +118,21 @@ function doResizeAndOutput(location, config)
 			//     }
 			// }
 		}
+		//
+		// for(var i in config.sizes) {
+		// 	var fullOutputFolderPath = (config.sizes[i].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[i].subFolder : outputFolderPath;
+		// 	var outputFolder = new Folder(fullOutputFolderPath);
+		// 	if(!outputFolder.exists) outputFolder.create();
+		//
+		// 	activeDocument.resizeImage(null,config.sizes[i].x,config.sizes[i].y,ResampleMethod.BICUBIC);
+		// 	activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
+		//
+		// 	// Undo Resize so we are working with crisp resizing.
+		// 	app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
+		// }
 
-		for(var i in config.sizes) {
-			var fullOutputFolderPath = (config.sizes[i].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[i].subFolder : outputFolderPath;
-			var outputFolder = new Folder(fullOutputFolderPath);
-			if(!outputFolder.exists) outputFolder.create();
 
-			activeDocument.resizeImage(null,config.sizes[i].x,config.sizes[i].y,ResampleMethod.BICUBIC);
-			activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
-
-			// Undo Resize so we are working with crisp resizing.
-			app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
-		}
-
-
-		activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+		// activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 		if(config.confirm === true) {
 	    alert("Done\nAll the new icons have been saved beside your original icons.")
 		}
