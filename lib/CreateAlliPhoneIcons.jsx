@@ -35,7 +35,7 @@ var hideAllLayerSets = function(doc) {
 	}
 }
 
-var processDocument = function(config, propertyName, outputFolderPath, activeDocument, options, app) {
+var processDocument = function(config, propertyName, outputFolderPath, activeDocument, options) {
 	for(var j in config.sizes) {
 		var historyStateCounter = 2;
 		if(propertyName !== null){
@@ -113,15 +113,15 @@ function doResizeAndOutput(location, config)
 				if(activeDocument.layerSets[i].name.indexOf("-")>-1){
 					hideAllLayerSets(activeDocument);
 					activeDocument.layerSets[i].visible = true;
-					var layerName = activeDocument.layerSets[i].name;
+					var propertyName = activeDocument.layerSets[i].name;
 
-					processDocument(config, layerName, outputFolder, activeDocument, options, app)
+					processDocument(config, propertyName, outputFolder, activeDocument, options)
 
 				}
 			}
 		} else {
 			//output the current state of the file, based on the config
-			processDocument(config, null, outputFolder, activeDocument, options, app)
+			processDocument(config, null, outputFolder, activeDocument, options)
 		}
 
 
