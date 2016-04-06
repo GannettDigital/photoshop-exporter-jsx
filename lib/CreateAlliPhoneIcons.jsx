@@ -35,7 +35,7 @@ var hideAllLayerSets = function(doc) {
 	}
 }
 
-var something = function(config, layerName, outputFolderPath, activeDocument, options, app) {
+var processDocument = function(config, layerName, outputFolderPath, activeDocument, options, app) {
 	for(var j in config.sizes) {
 		var historyStateCounter = 2;
 		if(layerName !== null){
@@ -84,8 +84,6 @@ function doResizeAndOutput(location, config)
 		var outputFolder = new Folder(outputFolderPath);
 		if(!outputFolder.exists) outputFolder.create();
 
-
-
 	    // Check document resolution
 		if(activeDocument.resolution!=72){
 			activeDocument.resizeImage(null,activeDocument.height,72,ResampleMethod.BICUBIC);
@@ -118,13 +116,13 @@ function doResizeAndOutput(location, config)
 					activeDocument.layerSets[i].visible = true;
 					var layerName = activeDocument.layerSets[i].name;
 
-					something(config, layerName, outputFolder, activeDocument, options, app)
+					processDocument(config, layerName, outputFolder, activeDocument, options, app)
 
 				}
 			}
 		} else {
 			//output the current state of the file, based on the config
-			something(config, null, outputFolder, activeDocument, options, app)
+			processDocument(config, null, outputFolder, activeDocument, options, app)
 		}
 
 
