@@ -100,6 +100,7 @@ function doResizeAndOutput(location, config)
 
 						// Undo Resize so we are working with crisp resizing.
 						app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
+						$.writeln(fullOutputFolderPath + "/"+config.sizes[j].name);
 					}
 				}
 			}
@@ -115,6 +116,7 @@ function doResizeAndOutput(location, config)
 
 				// Undo Resize so we are working with crisp resizing.
 				app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
+				$.writeln(fullOutputFolderPath + "/"+config.sizes[i].name);
 			}
 		}
 
