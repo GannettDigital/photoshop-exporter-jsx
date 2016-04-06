@@ -93,6 +93,7 @@ function doResizeAndOutput(location, config)
 					var layerName = activeDocument.layerSets[i].name;
 
 					for(var j in config.sizes) {
+						var historyStateCounter = 2;
 						var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+layerName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+layerName;
 						var outputFolder = new Folder(fullOutputFolderPath);
 						if(!outputFolder.exists) outputFolder.create();
@@ -102,11 +103,12 @@ function doResizeAndOutput(location, config)
 						if(config.sizes[j].canvasSize && config.sizes[j].canvasSize !== null) {
 							activeDocument.resizeCanvas(config.sizes[j].canvasSize.x,config.sizes[j].canvasSize.y,AnchorPosition.MIDDLECENTER);
 							$.writeln("Changed size of canvas");
+							historyStateCounter++;
 						}
 						activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[j].name), ExportType.SAVEFORWEB, options);
 
 						// Undo Resize so we are working with crisp resizing.
-						app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
+						app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - historyStateCounter];
 						$.writeln(fullOutputFolderPath + "/"+config.sizes[j].name);
 					}
 				}
@@ -114,6 +116,7 @@ function doResizeAndOutput(location, config)
 		} else {
 			//output the current state of the file, based on the config
 			for(var i in config.sizes) {
+				var historyStateCounter = 2;
 				var fullOutputFolderPath = (config.sizes[i].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[i].subFolder : outputFolderPath;
 				var outputFolder = new Folder(fullOutputFolderPath);
 				if(!outputFolder.exists) outputFolder.create();
@@ -123,13 +126,14 @@ function doResizeAndOutput(location, config)
 				if(config.sizes[i].canvasSize && config.sizes[i].canvasSize !== null) {
 					activeDocument.resizeCanvas(config.sizes[i].canvasSize.x,config.sizes[j].canvasSize.y,AnchorPosition.MIDDLECENTER);
 					$.writeln("Changed size of canvas");
+					historyStateCounter++;
 				}
 				activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
 
 
 
 				// Undo Resize so we are working with crisp resizing.
-				app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
+				app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - historyStateCounter];
 				$.writeln(fullOutputFolderPath + "/"+config.sizes[i].name);
 			}
 		}
