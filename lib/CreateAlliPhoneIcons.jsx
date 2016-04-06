@@ -35,13 +35,13 @@ var hideAllLayerSets = function(doc) {
 	}
 }
 
-var processDocument = function(config, layerName, outputFolderPath, activeDocument, options, app) {
+var processDocument = function(config, propertyName, outputFolderPath, activeDocument, options, app) {
 	for(var j in config.sizes) {
 		var historyStateCounter = 2;
-		if(layerName !== null){
-			var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+layerName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+layerName;
+		if(propertyName !== null){
+			var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+propertyName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+propertyName;
 		} else {
-			var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+layerName;
+			var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/';
 		}
 		var outputFolder = new Folder(fullOutputFolderPath);
 		if(!outputFolder.exists) outputFolder.create();
@@ -56,7 +56,7 @@ var processDocument = function(config, layerName, outputFolderPath, activeDocume
 		activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[j].name), ExportType.SAVEFORWEB, options);
 
 		// Undo Resize so we are working with crisp resizing.
-		app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - historyStateCounter];
+		activeDocument.activeHistoryState = activeDocument.historyStates[activeDocument.historyStates.length - historyStateCounter];
 		$.writeln(fullOutputFolderPath + "/"+config.sizes[j].name);
 	}
 }
@@ -66,7 +66,6 @@ function doResizeAndOutput(location, config)
 {
 
    	// Select Icon file
-
 		if(typeof location === "object"){
 			//single config object passed, prompt user for file
 			config = location;
