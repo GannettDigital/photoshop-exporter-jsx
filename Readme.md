@@ -5,10 +5,10 @@
 ###Table of Contents
 - [Usage](#usage)
 - [Minimal example](#minimal-configuration-object-syntax)
-- Simple usage
-- Full configuration spec
-- Todos
-- Credits
+- [Simple usage](#simple-example-execution-script)
+- [Full configuration spec](#sample-configuration-object-for-common-ios-sizes)
+- [Todos](#todo)
+- [Credits](#credits)
 
 ###Usage
 From Photoshop, select the script from `File->Scripts->Browse...`, browse to createIcons.jsx, and select OK. Output files based on the configuration will be saved to the folder of the image (TODO: image selection).
@@ -79,5 +79,5 @@ Note: If `traverseLayers` is set to `true`, rather than outputting a single set 
 - [x] Add ability to traverse layers, rather than a file
 - [ ] Consider being able to run a script across an entire folder
 
-
-Based on the work by [John Ballinger](https://twitter.com/sponno), who released the original script under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
+###Credits
+Based on the work by [John Ballinger](https://twitter.com/sponno), who released the [original script](https://github.com/sponno/iPhone-Photoshop-JSX-Icon-Exporter) under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
