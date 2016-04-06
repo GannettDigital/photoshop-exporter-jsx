@@ -69,6 +69,35 @@ function doResizeAndOutput(location, config)
 
 		// Resize icons from largest to smallest - to preserve quality on resizing.
 		// Use configuration for determining x, y and filename.
+
+		if(config.traverseLayers && (config.traverseLayers === true)) {
+			// alert(activeDocument.layerSets[1].visible)
+
+
+			//loop through layers
+			//set all other layers to hidden
+			//set this layer to visible
+			//export using layer name as part of the path
+			alert("length:" +activeDocument.layerSets.length)
+			for(var i = 0; i<activeDocument.layerSets.length; i++) {
+				//valid layer names must contain a dash
+				if(activeDocument.layerSets[i].name.indexOf("-")>-1){
+
+					alert(activeDocument.layerSets[i].name)
+				}
+			}
+			// for( var i = 0; i < obj.artLayers.length; i++) {
+			//
+			// 		obj.artLayers[i].allLocked = false;
+			//        	obj.artLayers[i].visible = false;
+			//
+			//     }
+			//     for( var i = 0; i < obj.layerSets.length; i++) {
+			//         setInvisibleAllArtLayers(obj.layerSets[i]);
+			//     }
+			// }
+		}
+
 		for(var i in config.sizes) {
 			var fullOutputFolderPath = (config.sizes[i].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[i].subFolder : outputFolderPath;
 			var outputFolder = new Folder(fullOutputFolderPath);
@@ -86,5 +115,9 @@ function doResizeAndOutput(location, config)
 		if(config.confirm === true) {
 	    alert("Done\nAll the new icons have been saved beside your original icons.")
 		}
+
+
+
+
 
 }
