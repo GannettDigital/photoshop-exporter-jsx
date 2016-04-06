@@ -71,7 +71,9 @@ function doResizeAndOutput(location, config)
 				options.interlaced = false;
 				options.transparency = true;
 				options.optimized = true;
-				options.PNG8 = false;
+				options.PNG8 = true;
+				options.format = SaveDocumentType.PNG;
+
 
 		// Resize icons from largest to smallest - to preserve quality on resizing.
 		// Use configuration for determining x, y and filename.
@@ -96,13 +98,13 @@ function doResizeAndOutput(location, config)
 						if(!outputFolder.exists) outputFolder.create();
 
 						activeDocument.resizeImage(null,config.sizes[j].x,config.sizes[j].y,ResampleMethod.BICUBIC);
-						activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[j].name), ExportType.SAVEFORWEB, options);
-
 						//resize if canvas property has been set
 						if(config.sizes[j].canvasSize && config.sizes[j].canvasSize !== null) {
 							activeDocument.resizeCanvas(config.sizes[j].canvasSize.x,config.sizes[j].canvasSize.y,AnchorPosition.MIDDLECENTER);
 							$.writeln("Changed size of canvas");
 						}
+						activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[j].name), ExportType.SAVEFORWEB, options);
+
 						// Undo Resize so we are working with crisp resizing.
 						app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
 						$.writeln(fullOutputFolderPath + "/"+config.sizes[j].name);
@@ -117,13 +119,14 @@ function doResizeAndOutput(location, config)
 				if(!outputFolder.exists) outputFolder.create();
 
 				activeDocument.resizeImage(null,config.sizes[i].x,config.sizes[i].y,ResampleMethod.BICUBIC);
-				activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
-
 				//resize if canvas property has been set
 				if(config.sizes[i].canvasSize && config.sizes[i].canvasSize !== null) {
 					activeDocument.resizeCanvas(config.sizes[i].canvasSize.x,config.sizes[j].canvasSize.y,AnchorPosition.MIDDLECENTER);
 					$.writeln("Changed size of canvas");
 				}
+				activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
+
+
 
 				// Undo Resize so we are working with crisp resizing.
 				app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
