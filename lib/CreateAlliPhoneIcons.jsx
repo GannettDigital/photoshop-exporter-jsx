@@ -76,17 +76,13 @@ function doResizeAndOutput(location, config)
 		// Resize icons from largest to smallest - to preserve quality on resizing.
 		// Use configuration for determining x, y and filename.
 
+		//Either traverse the layers in a document and output multiple sets of files
+		//or just output one set of files for the whole doucment
 		if(config.traverseLayers && (config.traverseLayers === true)) {
-			// alert(activeDocument.layerSets[1].visible)
-
-
-
-
 			//loop through layers
 			//set all other layers to hidden
 			//set this layer to visible
 			//export using layer name as part of the path
-			alert("length:" +activeDocument.layerSets.length)
 			for(var i = 0; i<activeDocument.layerSets.length; i++) {
 				//valid layer names must contain a dash
 				if(activeDocument.layerSets[i].name.indexOf("-")>-1){
@@ -107,29 +103,21 @@ function doResizeAndOutput(location, config)
 					}
 				}
 			}
-			// for( var i = 0; i < obj.artLayers.length; i++) {
-			//
-			// 		obj.artLayers[i].allLocked = false;
-			//        	obj.artLayers[i].visible = false;
-			//
-			//     }
-			//     for( var i = 0; i < obj.layerSets.length; i++) {
-			//         setInvisibleAllArtLayers(obj.layerSets[i]);
-			//     }
-			// }
+		} else {
+			//output the current state of the file, based on the config
+			for(var i in config.sizes) {
+				var fullOutputFolderPath = (config.sizes[i].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[i].subFolder : outputFolderPath;
+				var outputFolder = new Folder(fullOutputFolderPath);
+				if(!outputFolder.exists) outputFolder.create();
+
+				activeDocument.resizeImage(null,config.sizes[i].x,config.sizes[i].y,ResampleMethod.BICUBIC);
+				activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
+
+				// Undo Resize so we are working with crisp resizing.
+				app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
+			}
 		}
-		//
-		// for(var i in config.sizes) {
-		// 	var fullOutputFolderPath = (config.sizes[i].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[i].subFolder : outputFolderPath;
-		// 	var outputFolder = new Folder(fullOutputFolderPath);
-		// 	if(!outputFolder.exists) outputFolder.create();
-		//
-		// 	activeDocument.resizeImage(null,config.sizes[i].x,config.sizes[i].y,ResampleMethod.BICUBIC);
-		// 	activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[i].name), ExportType.SAVEFORWEB, options);
-		//
-		// 	// Undo Resize so we are working with crisp resizing.
-		// 	app.activeDocument.activeHistoryState = app.activeDocument.historyStates[app.activeDocument.historyStates.length - 2];
-		// }
+
 
 
 		// activeDocument.close(SaveOptions.DONOTSAVECHANGES);
