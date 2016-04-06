@@ -3,13 +3,13 @@
 // #include "config-android.jsx"
 
 //use hard-coded file path
-var location = "~/Downloads/_TEST/iTunesArtwork.psd";
+// var location = "~/Downloads/_TEST/iTunesArtwork.psd";
 
 //load configuration from config-iOS.jsx
 var iOSconfig = iOS();
 // var androidconfig = android();
 
-doResizeAndOutput(location, iOSconfig); //iOS
+doResizeAndOutput(/*location,*/ iOSconfig); //iOS
 // doResizeAndOutput(location, androidconfig); //iOS
 
 
