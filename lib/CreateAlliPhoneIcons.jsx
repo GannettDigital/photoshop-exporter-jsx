@@ -120,7 +120,7 @@ function doResizeAndOutput(location, config)
 
 
 
-		// activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+		activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 		if(config.confirm === true) {
 	    alert("Done\nAll the new icons have been saved beside your original icons.")
 		}
