@@ -62,9 +62,11 @@ Suppressing confirmation dialog, as well as creating a base output folder only.
     {"x":87,"y":87,"name":"Icon-29@3x.png"}
   ],
   "confirm":false, //suppress confirmation dialog
-  "outputFolder":"iOS" //create and/or target a folder relative to where the .psd is located
+  "outputFolder":"iOS", //create and/or target a folder relative to where the .psd is located
+  "traverseLayers":true //traverse the layer folder sets of a document, and output a set of files per layer set
 }
 ```
+Note: If `traverseLayers` is set to `true`, rather than outputting a single set of files for a given image, the script looks for layer sets (folders) within the document, specifically with a dash in the name, for example `cincinnati-oh`, and runs the output script for each layer that matches.
 
 ###Todo
 - [x] define config format
@@ -74,7 +76,7 @@ Suppressing confirmation dialog, as well as creating a base output folder only.
 - [x] deal with alternate output file paths
 - [ ] Add screenshots to the Readme
 - [x] Add Table of Contents to the Readme
-- [ ] Add ability to traverse layers, rather than a file
+- [x] Add ability to traverse layers, rather than a file
 - [ ] Consider being able to run a script across an entire folder
 
 
