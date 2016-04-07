@@ -37,12 +37,26 @@ var hideAllLayerSets = function(doc) {
 
 var useFolder = function(path) {
 	var outputFolder = new Folder(path);
-	if(!outputFolder.exists) outputFolder.create();
+	if(!outputFolder.exists) {
+		outputFolder.create();
+		$.writeln("Created new folder: " + path);
+	} else {
+		$.writeln("Used existing folder: " + path);
+	}
 	return outputFolder;
 };
 
-var processDocument = function(config, propertyName, outputFolderPath, activeDocument, options) {
-	$.writeln(outputFolderPath);
+var processDocument = function(config, propertyName, activeDocument, options) {
+	//get output folder setup
+
+	// var baseFolderPath, baseFolder;
+	// if(propertyName !== null) {
+	// 	baseFolderPath = (config.outputFolder !== undefined) ? config.filePath+'/'+config.outputFolder : config.filePath;
+	// 	baseFolder = useFolder(baseFolderPath);
+	// } else {
+	//
+	// }
+
 
 	for(var j in config.sizes) {
 		var historyStateCounter = 2;
@@ -53,15 +67,22 @@ var processDocument = function(config, propertyName, outputFolderPath, activeDoc
 		// 	fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/';
 		// }
 
-		var outputFolderPathSegments = (propertyName !== null) ? [propertyName,outputFolderPath] : [outputFolderPath];
-		if(config.sizes[j].subFolder !== undefined) {
-			outputFolderPathSegments.push(config.sizes[j].subFolder);
+		var possiblePathSegments = [config.filePath, propertyName, config.outputFolder, config.sizes[j].subFolder];
+		var path = [];
+		for(var i in possiblePathSegments) {
+			if(possiblePathSegments[i] !== null) {
+				path.push(possiblePathSegments[i]);
+			}
 		}
 
-		var fullOutputFolderPath = outputFolderPathSegments.join("/");
-		$.writeln(fullOutputFolderPath);
 
+		//
+		// var outputFolderPathSegments = (propertyName !== null) ? [propertyName,baseFolderPath] : [baseFolderPath];
+		// if(config.sizes[j].subFolder !== undefined) {
+		// 	outputFolderPathSegments.push(config.sizes[j].subFolder);
+		// }
 
+		var fullOutputFolderPath = path.join("/");
 		var outputFolder = useFolder(fullOutputFolderPath);
 
 		activeDocument.resizeImage(null,config.sizes[j].x,config.sizes[j].y,ResampleMethod.BICUBIC);
@@ -95,10 +116,7 @@ var doResizeAndOutput = function(location, config) {
 		if(file === null) return; // cancelled.
         app.open(file);
 		var path =  file.absoluteURI.substr(0,file.absoluteURI.lastIndexOf("/")+1);
-
-		//get output folder setup
-		var outputFolderPath = (config.outputFolder !== undefined) ? path+'/'+config.outputFolder : path;
-		var outputFolder = useFolder(outputFolderPath);
+		config.filePath = path;
 
 	    // Check document resolution
 		if(activeDocument.resolution!=72){
@@ -132,13 +150,13 @@ var doResizeAndOutput = function(location, config) {
 					activeDocument.layerSets[i].visible = true;
 					var propertyName = activeDocument.layerSets[i].name;
 
-					processDocument(config, propertyName, outputFolder, activeDocument, options);
+					processDocument(config, propertyName, activeDocument, options);
 
 				}
 			}
 		} else {
 			//output the current state of the file, based on the config
-			processDocument(config, null, outputFolder, activeDocument, options);
+			processDocument(config, null, activeDocument, options);
 		}
 
 		activeDocument.close(SaveOptions.DONOTSAVECHANGES);
