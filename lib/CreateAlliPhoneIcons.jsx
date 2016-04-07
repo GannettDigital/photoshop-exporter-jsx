@@ -69,7 +69,7 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 		//resize canvas if required
 		if(config.sizes[j].canvasSize && config.sizes[j].canvasSize !== null) {
 			activeDocument.resizeCanvas(config.sizes[j].canvasSize.x,config.sizes[j].canvasSize.y,AnchorPosition.MIDDLECENTER);
-			$.writeln("Changed size of canvas");
+			$.writeln("Changed size of canvas for "+config.sizes[j].name);
 			historyStateCounter++;
 		}
 
@@ -78,8 +78,12 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 		historyStateCounter++;
 
 		// Undo Resize so we are working with crisp resizing.
-		activeDocument.activeHistoryState = activeDocument.historyStates[activeDocument.historyStates.length - historyStateCounter];
-		$.writeln(fullOutputFolderPath + "/"+config.sizes[j].name);
+		try {
+			activeDocument.activeHistoryState = activeDocument.historyStates[activeDocument.historyStates.length - historyStateCounter];
+			$.writeln(fullOutputFolderPath + "/"+config.sizes[j].name);
+		} catch(e) {
+			$.writeln(e);
+		}
 	}
 };
 
