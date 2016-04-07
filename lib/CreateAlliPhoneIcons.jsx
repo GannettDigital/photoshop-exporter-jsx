@@ -47,26 +47,10 @@ var useFolder = function(path) {
 };
 
 var processDocument = function(config, propertyName, activeDocument, options) {
-	//get output folder setup
-
-	// var baseFolderPath, baseFolder;
-	// if(propertyName !== null) {
-	// 	baseFolderPath = (config.outputFolder !== undefined) ? config.filePath+'/'+config.outputFolder : config.filePath;
-	// 	baseFolder = useFolder(baseFolderPath);
-	// } else {
-	//
-	// }
-
-
 	for(var j in config.sizes) {
-		var historyStateCounter = 2;
-		// var fullOutputFolderPath = "";
-		// if(propertyName !== null){
-		// 	fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+propertyName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+propertyName;
-		// } else {
-		// 	fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/';
-		// }
+		var historyStateCounter = 0;
 
+		//construct path with optional segments
 		var possiblePathSegments = [config.filePath, propertyName, config.outputFolder, config.sizes[j].subFolder];
 		var path = [];
 		for(var i in possiblePathSegments) {
@@ -74,25 +58,24 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 				path.push(possiblePathSegments[i]);
 			}
 		}
-
-
-		//
-		// var outputFolderPathSegments = (propertyName !== null) ? [propertyName,baseFolderPath] : [baseFolderPath];
-		// if(config.sizes[j].subFolder !== undefined) {
-		// 	outputFolderPathSegments.push(config.sizes[j].subFolder);
-		// }
-
 		var fullOutputFolderPath = path.join("/");
+		//create folder structure
 		var outputFolder = useFolder(fullOutputFolderPath);
 
+		//resize image for target size
 		activeDocument.resizeImage(null,config.sizes[j].x,config.sizes[j].y,ResampleMethod.BICUBIC);
-		//resize if canvas property has been set
+		historyStateCounter++;
+
+		//resize canvas if required
 		if(config.sizes[j].canvasSize && config.sizes[j].canvasSize !== null) {
 			activeDocument.resizeCanvas(config.sizes[j].canvasSize.x,config.sizes[j].canvasSize.y,AnchorPosition.MIDDLECENTER);
 			$.writeln("Changed size of canvas");
 			historyStateCounter++;
 		}
+
+		//export document
 		activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[j].name), ExportType.SAVEFORWEB, options);
+		historyStateCounter++;
 
 		// Undo Resize so we are working with crisp resizing.
 		activeDocument.activeHistoryState = activeDocument.historyStates[activeDocument.historyStates.length - historyStateCounter];
