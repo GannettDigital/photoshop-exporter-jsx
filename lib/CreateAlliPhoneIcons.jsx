@@ -33,15 +33,16 @@ var hideAllLayerSets = function(doc) {
 	for(var i =0; i<doc.layerSets.length; i++) {
 		doc.layerSets[i].visible = false;
 	}
-}
+};
 
 var processDocument = function(config, propertyName, outputFolderPath, activeDocument, options) {
 	for(var j in config.sizes) {
 		var historyStateCounter = 2;
+		var fullOutputFolderPath = "";
 		if(propertyName !== null){
-			var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+propertyName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+propertyName;
+			fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+propertyName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+propertyName;
 		} else {
-			var fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/';
+			fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/';
 		}
 		var outputFolder = new Folder(fullOutputFolderPath);
 		if(!outputFolder.exists) outputFolder.create();
@@ -59,22 +60,23 @@ var processDocument = function(config, propertyName, outputFolderPath, activeDoc
 		activeDocument.activeHistoryState = activeDocument.historyStates[activeDocument.historyStates.length - historyStateCounter];
 		$.writeln(fullOutputFolderPath + "/"+config.sizes[j].name);
 	}
-}
+};
 
 //create a new slideshow package
 function doResizeAndOutput(location, config)
 {
 
    	// Select Icon file
+		var file;
 		if(typeof location === "object"){
 			//single config object passed, prompt user for file
 			config = location;
-			var file = File.openDialog("Select a file to process.", /\.(jpe|jpg|jpeg|gif|png|tif|tiff|bmp|psd)/i);
+			file = File.openDialog("Select a file to process.", /\.(jpe|jpg|jpeg|gif|png|tif|tiff|bmp|psd)/i);
 		} else {
-			var file = File(location); //hard code a filename
+			file = File(location); //hard code a filename
 		}
 
-		if(file == null) return; // cancelled.
+		if(file === null) return; // cancelled.
         app.open(file);
 		var path =  file.absoluteURI.substr(0,file.absoluteURI.lastIndexOf("/")+1);
 
@@ -115,24 +117,20 @@ function doResizeAndOutput(location, config)
 					activeDocument.layerSets[i].visible = true;
 					var propertyName = activeDocument.layerSets[i].name;
 
-					processDocument(config, propertyName, outputFolder, activeDocument, options)
+					processDocument(config, propertyName, outputFolder, activeDocument, options);
 
 				}
 			}
 		} else {
 			//output the current state of the file, based on the config
-			processDocument(config, null, outputFolder, activeDocument, options)
+			processDocument(config, null, outputFolder, activeDocument, options);
 		}
 
 
 
 		activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 		if(config.confirm === true) {
-	    alert("Done\nAll the new icons have been saved beside your original icons.")
+	    alert("Done\nAll the new icons have been saved beside your original icons.");
 		}
-
-
-
-
 
 }
