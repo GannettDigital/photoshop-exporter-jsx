@@ -6,8 +6,7 @@
 - [Usage](#usage)
 - [Minimal example](#minimal-configuration-object-syntax)
 - [Simple usage](#simple-example-execution-script)
-- [Full configuration spec](#sample-configuration-object-for-common-ios-sizes)
-- [Todos](#todo)
+- [Full configuration spec](#full-object-configuration-options)
 - [Credits](#credits)
 
 ###Usage
