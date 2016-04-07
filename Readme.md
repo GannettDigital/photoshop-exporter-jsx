@@ -102,11 +102,11 @@ Suppressing confirmation dialog, as well as creating a base output folder only.
 
 
 The `sizes` array takes a few required and _optional_ properties in each of its array's objects.
-* `x`: width of the resized image.
-* `y`: height of the resized image.
-* `name`: file name. This script only outputs pngs, so **.png** should be added to the file name as per the examples.
-* `subFolder` _(optional)_: combines with `outputFolder` to create a per-item output path. For example, if `outputFolder` is **iOS** and `subFolder` is **@2x**, the final path of an image would be **iOS/@2x**.
-* `canvasSize` _(optional)_: increases the canvas size of an image before saving, but after resizing. A sample use-case is that iOS requires icons to be the full width available for an app, whereas Android requests 8px of padding around each icon. Designers can use the same icon for both, and only on output is the padding added to the Android assets.
+* `x` **integer**: width of the resized image.
+* `y` **integer**: height of the resized image.
+* `name` **string**: file name. This script only outputs pngs, so **.png** should be added to the file name as per the examples.
+* `subFolder` **string** _(optional)_: combines with `outputFolder` to create a per-item output path. For example, if `outputFolder` is **iOS** and `subFolder` is **@2x**, the final path of an image would be **iOS/@2x**.
+* `canvasSize` **object** _(optional)_: increases the canvas size of an image before saving, but after resizing. A sample use-case is that iOS requires icons to be the full width available for an app, whereas Android requests 8px of padding around each icon. Designers can use the same icon for both, and only on output is the padding added to the Android assets.
 
 
 ```javascript
