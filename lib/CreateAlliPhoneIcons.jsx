@@ -35,17 +35,34 @@ var hideAllLayerSets = function(doc) {
 	}
 };
 
+var useFolder = function(path) {
+	var outputFolder = new Folder(path);
+	if(!outputFolder.exists) outputFolder.create();
+	return outputFolder;
+};
+
 var processDocument = function(config, propertyName, outputFolderPath, activeDocument, options) {
+	$.writeln(outputFolderPath);
+
 	for(var j in config.sizes) {
 		var historyStateCounter = 2;
-		var fullOutputFolderPath = "";
-		if(propertyName !== null){
-			fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+propertyName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+propertyName;
-		} else {
-			fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/';
+		// var fullOutputFolderPath = "";
+		// if(propertyName !== null){
+		// 	fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+propertyName+'/'+config.sizes[j].subFolder : outputFolderPath+'/'+propertyName;
+		// } else {
+		// 	fullOutputFolderPath = (config.sizes[j].subFolder !== undefined) ? outputFolderPath+'/'+config.sizes[j].subFolder : outputFolderPath+'/';
+		// }
+
+		var outputFolderPathSegments = (propertyName !== null) ? [propertyName,outputFolderPath] : [outputFolderPath];
+		if(config.sizes[j].subFolder !== undefined) {
+			outputFolderPathSegments.push(config.sizes[j].subFolder);
 		}
-		var outputFolder = new Folder(fullOutputFolderPath);
-		if(!outputFolder.exists) outputFolder.create();
+
+		var fullOutputFolderPath = outputFolderPathSegments.join("/");
+		$.writeln(fullOutputFolderPath);
+
+
+		var outputFolder = useFolder(fullOutputFolderPath);
 
 		activeDocument.resizeImage(null,config.sizes[j].x,config.sizes[j].y,ResampleMethod.BICUBIC);
 		//resize if canvas property has been set
@@ -81,8 +98,7 @@ var doResizeAndOutput = function(location, config) {
 
 		//get output folder setup
 		var outputFolderPath = (config.outputFolder !== undefined) ? path+'/'+config.outputFolder : path;
-		var outputFolder = new Folder(outputFolderPath);
-		if(!outputFolder.exists) outputFolder.create();
+		var outputFolder = useFolder(outputFolderPath);
 
 	    // Check document resolution
 		if(activeDocument.resolution!=72){
