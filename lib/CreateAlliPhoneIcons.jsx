@@ -63,8 +63,7 @@ var processDocument = function(config, propertyName, outputFolderPath, activeDoc
 };
 
 //create a new slideshow package
-function doResizeAndOutput(location, config)
-{
+var doResizeAndOutput = function(location, config) {
 
    	// Select Icon file
 		var file;
@@ -126,11 +125,9 @@ function doResizeAndOutput(location, config)
 			processDocument(config, null, outputFolder, activeDocument, options);
 		}
 
-
-
 		activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 		if(config.confirm === true) {
 	    alert("Done\nAll the new icons have been saved beside your original icons.");
 		}
 
-}
+};
