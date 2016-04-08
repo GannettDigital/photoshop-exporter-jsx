@@ -116,7 +116,7 @@ var doResizeAndOutput = function(location, config) {
 				options.interlaced = false;
 				options.transparency = true;
 				options.optimized = true;
-				options.PNG8 = true;
+				options.PNG8 = false;
 				options.format = SaveDocumentType.PNG;
 
 
