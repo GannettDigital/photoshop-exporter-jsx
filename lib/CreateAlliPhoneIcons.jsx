@@ -63,7 +63,8 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 		var outputFolder = useFolder(fullOutputFolderPath);
 
 		//resize image for target size
-		activeDocument.resizeImage(null,config.sizes[j].x,config.sizes[j].y,ResampleMethod.BICUBIC);
+		activeDocument.resizeImage(config.sizes[j].x,config.sizes[j].y,72,ResampleMethod.BICUBIC);
+		$.writeln("Changed size of image for "+config.sizes[j].name+" to "+[config.sizes[j].x,config.sizes[j].y].join(","));
 		historyStateCounter++;
 
 		//resize canvas if required
