@@ -1,3 +1,4 @@
+#include "stdlib.js";
 
 /***********************************************************************
 
@@ -36,6 +37,7 @@ var hideAllLayerSets = function(doc) {
 };
 
 var useFolder = function(path) {
+	path = path.replace('//','/');
 	var outputFolder = new Folder(path);
 	if(!outputFolder.exists) {
 		outputFolder.create();
@@ -62,6 +64,10 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 		//create folder structure
 		var outputFolder = useFolder(fullOutputFolderPath);
 
+		//convert to smart object
+		Stdlib.convertToSmartLayer(activeDocument, activeDocument.layerSets[propertyName]);
+		historyStateCounter++;
+
 		//resize image for target size
 		activeDocument.resizeImage(config.sizes[j].x,config.sizes[j].y,72,ResampleMethod.BICUBIC);
 		$.writeln("Changed size of image for "+config.sizes[j].name+" to "+[config.sizes[j].x,config.sizes[j].y].join(","));
@@ -75,6 +81,7 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 		}
 
 		//export document
+		// $.writeln("data:" + fullOutputFolderPath + "/" + config.sizes[j].name)
 		activeDocument.exportDocument(File(fullOutputFolderPath + "/"+config.sizes[j].name), ExportType.SAVEFORWEB, options);
 		historyStateCounter++;
 
@@ -102,7 +109,7 @@ var doResizeAndOutput = function(location, config) {
 		}
 
 		if(file === null) return; // cancelled.
-        app.open(file);
+				app.open(file);
 		var path =  file.absoluteURI.substr(0,file.absoluteURI.lastIndexOf("/")+1);
 		config.filePath = path;
 
@@ -134,10 +141,10 @@ var doResizeAndOutput = function(location, config) {
 			for(var i = 0; i<activeDocument.layerSets.length; i++) {
 				//valid layer names must contain a dash
 				if(activeDocument.layerSets[i].name.indexOf("-")>-1){
+
 					hideAllLayerSets(activeDocument);
 					activeDocument.layerSets[i].visible = true;
 					var propertyName = activeDocument.layerSets[i].name;
-
 					processDocument(config, propertyName, activeDocument, options);
 
 				}
