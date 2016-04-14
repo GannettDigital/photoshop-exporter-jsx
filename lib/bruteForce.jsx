@@ -26,10 +26,16 @@ var useFolder = function(path) {
 	return outputFolder;
 };
 
+// Select Icon file
+var location = "~/Sites/photoshop-exporter-jsx/test/blank.psd";
+var file = File(location); //hard code a filename
+
+// if(file === null) return; // cancelled.
+app.open(file);
 
 
 var docRef = app.activeDocument;
-var placeRef = new File("~/Dropbox/Sites/photoshop-exporter-jsx/test/output.psd");
+var placeRef = new File("~/Sites/photoshop-exporter-jsx/test/test.psd");
 PlaceFile(placeRef);
 MakeSmartLayer();
 // RasterizeSmart();
@@ -57,3 +63,20 @@ function MakeSmartLayer() {
    function sTID(s) { return app.stringIDToTypeID(s); };
    executeAction(sTID('newPlacedLayer'), undefined, DialogModes.NO);
 }
+
+var DebugDoc = function(){
+	var layerset = app.activeDocument.layerSets.add();
+	layerset.name = "voltron-property";
+
+	$.writeln(app.activeDocument.artLayers.length);
+	for(var i =0; i<app.activeDocument.artLayers.length; i++) {
+		// app.activeDocument.artLayers[i].visible = false;
+		if(app.activeDocument.artLayers[i].name !== "Background") {
+			app.activeDocument.artLayers[i].move(layerset, ElementPlacement.INSIDE);	
+		}
+
+	}
+	$.writeln("done");
+};
+
+DebugDoc();

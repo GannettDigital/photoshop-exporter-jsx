@@ -1,5 +1,3 @@
-#include "stdlib.js";
-
 /***********************************************************************
 
 iPhone App Icon Export for iPhone 4/3 Touch and iPad.
@@ -65,8 +63,8 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 		var outputFolder = useFolder(fullOutputFolderPath);
 
 		//convert to smart object
-		Stdlib.convertToSmartLayer(activeDocument, activeDocument.layerSets[propertyName]);
-		historyStateCounter++;
+		// Stdlib.convertToSmartLayer(activeDocument, activeDocument.layerSets[propertyName]);
+		// historyStateCounter++;
 
 		//resize image for target size
 		activeDocument.resizeImage(config.sizes[j].x,config.sizes[j].y,72,ResampleMethod.BICUBIC);
