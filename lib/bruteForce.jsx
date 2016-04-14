@@ -72,11 +72,18 @@ var DebugDoc = function(){
 	for(var i =0; i<app.activeDocument.artLayers.length; i++) {
 		// app.activeDocument.artLayers[i].visible = false;
 		if(app.activeDocument.artLayers[i].name !== "Background") {
-			app.activeDocument.artLayers[i].move(layerset, ElementPlacement.INSIDE);	
+			app.activeDocument.artLayers[i].move(layerset, ElementPlacement.INSIDE);
 		}
 
 	}
 	$.writeln("done");
 };
 
+var DebugApp = function() {
+	for(var i = 0; i<app.documents.length; i++) {
+		$.writeln(app.documents[i]);
+	}
+};
+
 DebugDoc();
+DebugApp();
