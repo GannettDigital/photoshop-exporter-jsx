@@ -26,19 +26,6 @@ var useFolder = function(path) {
 	return outputFolder;
 };
 
-// Select Icon file
-var location = "~/Sites/photoshop-exporter-jsx/test/blank.psd";
-var file = File(location); //hard code a filename
-
-// if(file === null) return; // cancelled.
-app.open(file);
-
-
-var docRef = app.activeDocument;
-var placeRef = new File("~/Sites/photoshop-exporter-jsx/test/test.psd");
-PlaceFile(placeRef);
-MakeSmartLayer();
-// RasterizeSmart();
 
 // Place file as Smart
 function PlaceFile(placeRef) {
@@ -84,6 +71,20 @@ var DebugApp = function() {
 		$.writeln(app.documents[i]);
 	}
 };
+
+// Select Icon file
+var location = "~/Sites/photoshop-exporter-jsx/test/blank.psd";
+var file = File(location); //hard code a filename
+
+// if(file === null) return; // cancelled.
+app.open(file);
+
+
+var docRef = app.activeDocument;
+var placeRef = new File("~/Sites/photoshop-exporter-jsx/test/test.psd");
+PlaceFile(placeRef);
+MakeSmartLayer();
+// RasterizeSmart();
 
 DebugDoc();
 DebugApp();
