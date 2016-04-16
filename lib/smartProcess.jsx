@@ -30,10 +30,12 @@ var smartProcess = function(config){
 	$.writeln(layerSets);
 
 	//delete all non-folder layers
-	try{
-		app.activeDocument.artLayers.removeAll();
-	} catch(e){
-		$.writeln("No extra layers to remove");
+	if(app.activeDocument.artLayers.length > 0) {
+		try{
+			app.activeDocument.artLayers.removeAll();
+		} catch(e){
+			$.writeln("No extra layers to remove");
+		}
 	}
 
 	var layerSetCount = layerSets.length;
@@ -57,12 +59,13 @@ var smartProcess = function(config){
 	app.open(outputFile);
 
 	//erase outputFile
-	try{
-		app.activeDocument.layerSets.removeAll();
-	} catch(e) {
-		$.writeln("No layersets to delete");
+	if(app.activeDocument.layerSets.length > 0) {
+		try{
+			app.activeDocument.layerSets.removeAll();
+		} catch(e) {
+			$.writeln("No layersets to delete");
+		}
 	}
-
 	//place temp input files
 	for(var i = 0; i<layerSetCount; i++) {
 		var newLayer = PlaceFile(new File(tempPath+ "tmp-"+layerSets[i]+".psd"));
