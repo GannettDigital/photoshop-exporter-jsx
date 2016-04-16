@@ -37,6 +37,10 @@ for(var i = 0; i<layerSetCount; i++) {
 var outputFilePath = "~/Downloads/photoshop-exporter-jsx/test/blank.psd";
 var outputFile = File(outputFilePath); //hard code a filename
 app.open(outputFile);
+
+//erase outputFile
+app.activeDocument.layerSets.removeAll();
+
 //place temp input files
 for(var i = 0; i<layerSetCount; i++) {
 	var newLayer = PlaceFile(new File("~/Downloads/photoshop-exporter-jsx/test/tmp-"+layerSets[i]+".psd"));
