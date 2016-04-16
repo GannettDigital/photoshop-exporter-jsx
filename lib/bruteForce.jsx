@@ -68,23 +68,36 @@ var DebugDoc = function(){
 
 var DebugApp = function() {
 	for(var i = 0; i<app.documents.length; i++) {
-		$.writeln(app.documents[i]);
+		$.writeln(app.documents[i].name);
 	}
+	$.writeln("current doc " +app.activeDocument.name);
+
+	app.activeDocument = app.documents[1];
+	$.writeln("active doc " +app.activeDocument.name);
 };
 
 // Select Icon file
-var location = "~/Sites/photoshop-exporter-jsx/test/blank.psd";
-var file = File(location); //hard code a filename
+var outputFilePath = "~/Downloads/photoshop-exporter-jsx/test/blank.psd";
+var outputFile = File(outputFilePath); //hard code a filename
 
 // if(file === null) return; // cancelled.
-app.open(file);
+app.open(outputFile);
 
 
 var docRef = app.activeDocument;
-var placeRef = new File("~/Sites/photoshop-exporter-jsx/test/test.psd");
-PlaceFile(placeRef);
+var inputFile = new File("~/Downloads/photoshop-exporter-jsx/test/test.psd");
+PlaceFile(inputFile);
 MakeSmartLayer();
 // RasterizeSmart();
+
+//start with input file
+	//loop through each layer
+		//hide other layers
+			//save file
+				//place file in new doc
+					//return to original doc
+
+
 
 DebugDoc();
 DebugApp();
