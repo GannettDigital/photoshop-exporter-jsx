@@ -29,9 +29,16 @@ var smartProcess = function(config){
 	$.writeln("---layer sets---");
 	$.writeln(layerSets);
 
+	//delete all non-folder layers
+	try{
+		app.activeDocument.artLayers.removeAll();
+	} catch(e){
+		$.writeln("No extra layers to remove");
+	}
+
 	var layerSetCount = layerSets.length;
 	for(var i = 0; i<layerSetCount; i++) {
-		// hide all other layers
+		// hide all other layersets
 		hideAllLayerSets(app.activeDocument);
 		// show this layer
 		app.activeDocument.layerSets[i].visible = true;
