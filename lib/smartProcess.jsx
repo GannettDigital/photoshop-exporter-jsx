@@ -30,7 +30,7 @@ for(var i = 0; i<layerSetCount; i++) {
 	// show this layer
 	app.activeDocument.layerSets[i].visible = true;
 	//save each visible layer as it's own file to a known temp place
-	app.activeDocument.saveAs(new File("~/Downloads/photoshop-exporter-jsx/test/tmp-"+i+".psd"));
+	app.activeDocument.saveAs(new File("~/Downloads/photoshop-exporter-jsx/test/tmp-"+layerSets[i]+".psd"));
 }
 
 //start with output file
@@ -39,10 +39,10 @@ var outputFile = File(outputFilePath); //hard code a filename
 app.open(outputFile);
 //place temp input files
 for(var i = 0; i<layerSetCount; i++) {
-	var newLayer = PlaceFile(new File("~/Downloads/photoshop-exporter-jsx/test/tmp-"+i+".psd"));
+	var newLayer = PlaceFile(new File("~/Downloads/photoshop-exporter-jsx/test/tmp-"+layerSets[i]+".psd"));
 
 	var layerset = app.activeDocument.layerSets.add();
-	layerset.name = "layer-set-"+i;
+	layerset.name = layerSets[i];
 	newLayer.move(layerset, ElementPlacement.INSIDE);
 }
 
