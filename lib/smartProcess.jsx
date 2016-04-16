@@ -8,7 +8,7 @@ app.preferences.typeUnits = TypeUnits.PIXELS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //start with input file
-var inputFile = new File("~/Downloads/photoshop-exporter-jsx/test/test.psd");
+var inputFile = new File("~/Downloads/itunesArtwork.psd");
 app.open(inputFile);
 
 //loop through each layer
