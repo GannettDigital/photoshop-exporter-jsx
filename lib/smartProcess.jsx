@@ -68,18 +68,3 @@ var smartProcess = function(config){
 	doResizeAndOutput(outputFilePath,config);
 
 }
-
-smartProcess({
-	"inputFile":"~/Downloads/itunesArtworkLimited.psd",
-	"sizes":[
-		{"x":150,"y":150,"name":"scaled-25%.png"},
-		{"x":300,"y":300,"name":"scaled-50%.png"},
-		{"x":600,"y":600,"name":"scaled-100%.png"},
-		{"x":1200,"y":1200,"name":"scaled-200%.png"},
-		{"x":2400,"y":2400,"name":"scaled-400%.png"}
-	],
-	"confirm":false,
-	"outputBaseFolder":"~/Downloads",
-	"outputFolder":"test",
-	"traverseLayers":true
-});
