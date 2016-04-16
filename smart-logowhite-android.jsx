@@ -1,8 +1,11 @@
 //load library
 ﻿#include "lib/smartProcess.jsx";
+#include "lib/displayUI.jsx";
+
+var wave = displayUI();
 
 var config = {
-	"inputFile":"~/Downloads/logo_white@2x.psd",
+	"inputFile":"/Volumes/everyRAID5/Dropbox/USCP-BCAST\ Brand\ Library/_Templates/"+wave+"/logo_white@2x.psd",
 	"sizes":[
 		{"x":255,"y":48,"name":"logo_default.png","subFolder":"drawable-hdpi"},
 		{"x":340,"y":64,"name":"logo_default.png","subFolder":"drawable-xhdpi"},
@@ -18,7 +21,7 @@ var config = {
 		{"x":298,"y":56,"name":"widget_header.png","subFolder":"drawable-xxxhdpi"}
 	],
 	"confirm":false,
-	"outputBaseFolder":"~/Downloads/Wave\ 1",
+	"outputBaseFolder":"/Volumes/everyRAID5/Dropbox/USCP-BCAST\ Brand\ Library/_Templates/Automated\ Output",
 	"outputFolder":"Android",
 	"traverseLayers":true
 };
