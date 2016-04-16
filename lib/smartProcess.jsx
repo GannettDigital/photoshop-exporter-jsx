@@ -75,12 +75,13 @@ var smartProcess = function(config){
 	  ],
 	  "confirm":false,
 	  "outputFolder":"test",
-	  "traverseLayers":true
+	  "traverseLayers":true,
+		"filePath":config.outputFolder
 	});
 
 }
 
 smartProcess({
 	"inputFile":"~/Downloads/itunesArtworkLimited.psd",
-	"outputFolder":"~/Downloads/"
+	"outputFolder":"~/Downloads/photoshop-exporter-jsx/test/"
 });
