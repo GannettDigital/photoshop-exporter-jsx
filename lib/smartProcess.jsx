@@ -50,7 +50,11 @@ var smartProcess = function(config){
 	app.open(outputFile);
 
 	//erase outputFile
-	app.activeDocument.layerSets.removeAll();
+	try{
+		app.activeDocument.layerSets.removeAll();
+	} catch(e) {
+		$.writeln("No layersets to delete");
+	}
 
 	//place temp input files
 	for(var i = 0; i<layerSetCount; i++) {
