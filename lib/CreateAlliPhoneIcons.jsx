@@ -109,7 +109,7 @@ var doResizeAndOutput = function(location, config) {
 		if(file === null) return; // cancelled.
 				app.open(file);
 		var path =  file.absoluteURI.substr(0,file.absoluteURI.lastIndexOf("/")+1);
-		config.filePath = path;
+		config.filePath = ("filePath" in config) ? config.filePath : path;
 
 	    // Check document resolution
 		if(activeDocument.resolution!=72){
