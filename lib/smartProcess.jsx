@@ -51,57 +51,33 @@ function MakeSmartLayer() {
    executeAction(sTID('newPlacedLayer'), undefined, DialogModes.NO);
 }
 
-var DebugDoc = function(){
-	var layerset = app.activeDocument.layerSets.add();
-	layerset.name = "voltron-property";
 
-	$.writeln(app.activeDocument.artLayers.length);
-	for(var i =0; i<app.activeDocument.artLayers.length; i++) {
-		// app.activeDocument.artLayers[i].visible = false;
-		if(app.activeDocument.artLayers[i].name !== "Background") {
-			app.activeDocument.artLayers[i].move(layerset, ElementPlacement.INSIDE);
-		}
-
-	}
-	$.writeln("done");
-};
-
-var DebugApp = function() {
-	for(var i = 0; i<app.documents.length; i++) {
-		$.writeln(app.documents[i].name);
-	}
-	$.writeln("current doc " +app.activeDocument.name);
-
-	// app.activeDocument = app.documents[1];
-	// $.writeln("active doc " +app.activeDocument.name);
-
-	//save as
-	//app.activeDocument.saveAs(new File("~/Downloads/photoshop-exporter-jsx/test/tmp.psd"));
-};
-
-// Select Icon file
-var outputFilePath = "~/Downloads/photoshop-exporter-jsx/test/blank.psd";
-var outputFile = File(outputFilePath); //hard code a filename
-
-// if(file === null) return; // cancelled.
-app.open(outputFile);
-
-
-var docRef = app.activeDocument;
-var inputFile = new File("~/Downloads/photoshop-exporter-jsx/test/test.psd");
-PlaceFile(inputFile);
-MakeSmartLayer();
-// RasterizeSmart();
 
 //start with input file
-	//loop through each layer
-		//save each visible layer as it's own file to a known temp place
+var inputFile = new File("~/Downloads/photoshop-exporter-jsx/test/test.psd");
+app.open(inputFile);
+
+//loop through each layer
+var layerSetCount = app.activeDocument.layerSets.length;
+
+for(var i = 0; i<layerSetCount; i++) {
+	// hide all other layers
+	hideAllLayerSets(app.activeDocument);
+	// show this layer
+	app.activeDocument.layerSets[i].visible = true;
+	//save each visible layer as it's own file to a known temp place
+	app.activeDocument.saveAs(new File("~/Downloads/photoshop-exporter-jsx/test/tmp-"+i+".psd"));
+}
 
 //start with output file
-	//place temp input files
+var outputFilePath = "~/Downloads/photoshop-exporter-jsx/test/blank.psd";
+var outputFile = File(outputFilePath); //hard code a filename
+app.open(outputFile);
+//place temp input files
+for(var i = 0; i<layerSetCount; i++) {
+	var newLayer = PlaceFile(new File("~/Downloads/photoshop-exporter-jsx/test/tmp-"+i+".psd"));
 
-
-
-
-DebugDoc();
-DebugApp();
+	var layerset = app.activeDocument.layerSets.add();
+	layerset.name = "layer-set-"+i;
+	newLayer.move(layerset, ElementPlacement.INSIDE);
+}
