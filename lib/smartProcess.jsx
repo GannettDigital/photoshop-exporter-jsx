@@ -8,11 +8,22 @@ app.preferences.typeUnits = TypeUnits.PIXELS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //start with input file
-var inputFile = new File("~/Downloads/itunesArtwork.psd");
+var inputFile = new File("~/Downloads/itunesArtworkLimited.psd");
 app.open(inputFile);
 
 //loop through each layer
-var layerSetCount = app.activeDocument.layerSets.length;
+var layerSets = [];
+//generate a clean list of layerset names
+for(var i = 0; i<app.activeDocument.layerSets.length; i++) {
+	if(app.activeDocument.layerSets[i].name.indexOf("-")>-1) {
+		layerSets.push(app.activeDocument.layerSets[i].name);
+	}
+}
+
+$.writeln("---layer sets---");
+$.writeln(layerSets);
+
+var layerSetCount = layerSets.length;
 for(var i = 0; i<layerSetCount; i++) {
 	// hide all other layers
 	hideAllLayerSets(app.activeDocument);
