@@ -4,6 +4,7 @@ var strtRulerUnits = app.preferences.rulerUnits;
 var strtTypeUnits = app.preferences.typeUnits;
 app.preferences.rulerUnits = Units.PIXELS;
 app.preferences.typeUnits = TypeUnits.PIXELS;
+app.displayDialogs = DialogModes.NO;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //start with input file
