@@ -8,8 +8,8 @@ var wave = displayUI();
 var config = {
 	"inputFile":"/Volumes/everyRAID5/Dropbox/USCP-BCAST\ Brand\ Library/_Templates/"+wave+"/LaunchPhone@2x.psd",
 	"sizes":[
-		{"x":260,"y":260,"name":"LaunchPhone.png"},
-		{"x":520,"y":520,"name":"LaunchPhone@2x.png"},
+		{"x":270,"y":270,"name":"LaunchPhone.png"},
+		{"x":540,"y":540,"name":"LaunchPhone@2x.png"},
 		{"x":1000,"y":1000,"name":"LaunchPhone@3x.png"}
   ],
 	"confirm":false,

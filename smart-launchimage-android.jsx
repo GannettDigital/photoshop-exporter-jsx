@@ -6,7 +6,7 @@ var wave = displayUI();
 
 
 var config = {
-	"inputFile":"/Volumes/everyRAID5/Dropbox/USCP-BCAST\ Brand\ Library/_Templates/"+wave+"/LaunchPad@2x.psd",
+	"inputFile":"/Volumes/everyRAID5/Dropbox/USCP-BCAST\ Brand\ Library/_Templates/"+wave+"/LaunchPhone@2x.psd",
 	"sizes":[
 		{"x":468,"y":468,"name":"branding_logo_large.png","subFolder":"drawable-hdpi"},
 		{"x":624,"y":624,"name":"branding_logo_large.png","subFolder":"drawable-xhdpi"},
