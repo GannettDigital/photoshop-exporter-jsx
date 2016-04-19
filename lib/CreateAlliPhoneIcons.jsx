@@ -73,9 +73,11 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 
 		//autocrop if enabled for asset type
 		if(("autocrop" in config)&&(config.autocrop === true)) {
+			activeDocument.activeLayer = activeDocument.layerSets.getByName(propertyName);
 			activeDocument.resizeCanvas(activeDocument.activeLayer.bounds[2],config.sizes[j].y,AnchorPosition.MIDDLELEFT);
 			$.writeln("autocrop enabled, cropped to: "+activeDocument.activeLayer.bounds[2]+","+config.sizes[j].y);
-			historyStateCounter++;
+			$.writeln("details for autocrop:"+activeDocument.activeLayer.bounds.join(",")+" "+activeDocument.activeLayer.name);
+			// historyStateCounter++;
 		}
 
 		//resize canvas if required
