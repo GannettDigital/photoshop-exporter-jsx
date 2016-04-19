@@ -74,7 +74,12 @@ var smartProcess = function(config){
 		var layerset = app.activeDocument.layerSets.add();
 		layerset.name = layerSets[i];
 		newLayer.move(layerset, ElementPlacement.INSIDE);
+		$.writeln("MOVE DEBUG: moved "+newLayer.name+" aka tmp-"+layerSets[i]+".psd into "+layerset.name);
+		if(app.activeDocument.artLayers.length>1) {
+			confirm("problem")
+		}
 	}
+
 
 	//test code
 	// $.writeln("***alternate layer deletion strategy for output doc***")
@@ -89,6 +94,12 @@ var smartProcess = function(config){
 
 	#include "CreateAlliPhoneIcons.jsx";
 
+
+		app.activeDocument.save();
+		app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+		app.open(new File(outputFilePath));
+
+		
 	doResizeAndOutput(outputFilePath,config);
 
 }
