@@ -9,6 +9,8 @@
 - [Full configuration spec](#full-object-configuration-options)
 - [Credits](#credits)
 
+![Photoshop Dialog](documentation/images/interface.png)
+
 ###Usage
 From Photoshop, select the script from `File->Scripts->Browse...`, browse to createIcons.jsx, and select OK. Output files based on the configuration will be saved to the folder of the image (TODO: image selection).
 
