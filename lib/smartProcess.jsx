@@ -31,13 +31,24 @@ var smartProcess = function(config){
 	$.writeln(layerSets);
 
 	//delete all non-folder layers
-	if(app.activeDocument.artLayers.length > 0) {
-		try{
-			app.activeDocument.artLayers.removeAll();
-		} catch(e){
-			$.writeln("No extra layers to remove");
+	// if(app.activeDocument.artLayers.length > 0) {
+	// 	try{
+	// 		app.activeDocument.artLayers.removeAll();
+	// 	} catch(e){
+	// 		$.writeln("No extra layers to remove");
+	// 	}
+	// }
+
+	//test code
+	$.writeln("***alternate layer deletion strategy***")
+	var layersDeleted = 0;
+	for(var i=0; i<app.activeDocument.artLayers.length; i++) {
+		if(app.activeDocument.artLayers[i].name !== "Background") {
+			app.activeDocument.artLayers[i].clear();
+			layersDeleted++;
 		}
 	}
+	if(layersDeleted>0) $.writeln("Layers Deleted: " + layersDeleted);
 
 	var layerSetCount = layerSets.length;
 	for(var i = 0; i<layerSetCount; i++) {
