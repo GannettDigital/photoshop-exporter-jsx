@@ -71,12 +71,21 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 		$.writeln("Changed size of image for "+config.sizes[j].name+" to "+[config.sizes[j].x,config.sizes[j].y].join(","));
 		historyStateCounter++;
 
+		//autocrop if enabled for asset type
+		if(("autocrop" in config)&&(config.autocrop === true)) {
+			activeDocument.resizeCanvas(activeDocument.activeLayer.bounds[2],config.sizes[j].y,AnchorPosition.MIDDLELEFT);
+			$.writeln("autocrop enabled, cropped to: "+activeDocument.activeLayer.bounds[2]+","+config.sizes[j].y);
+			historyStateCounter++;
+		}
+
 		//resize canvas if required
 		if(config.sizes[j].canvasSize && config.sizes[j].canvasSize !== null) {
 			activeDocument.resizeCanvas(config.sizes[j].canvasSize.x,config.sizes[j].canvasSize.y,AnchorPosition.MIDDLECENTER);
 			$.writeln("Changed size of canvas for "+config.sizes[j].name);
 			historyStateCounter++;
 		}
+
+
 
 		//export document
 		// $.writeln("data:" + fullOutputFolderPath + "/" + config.sizes[j].name)
