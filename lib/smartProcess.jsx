@@ -39,17 +39,6 @@ var smartProcess = function(config){
 	// 	}
 	// }
 
-	//test code
-	$.writeln("***alternate layer deletion strategy***")
-	var layersDeleted = 0;
-	for(var i=0; i<app.activeDocument.artLayers.length; i++) {
-		if(app.activeDocument.artLayers[i].name !== "Background") {
-			app.activeDocument.artLayers[i].clear();
-			layersDeleted++;
-		}
-	}
-	if(layersDeleted>0) $.writeln("Layers Deleted: " + layersDeleted);
-
 	var layerSetCount = layerSets.length;
 	for(var i = 0; i<layerSetCount; i++) {
 		// hide all other layersets
@@ -86,6 +75,15 @@ var smartProcess = function(config){
 		layerset.name = layerSets[i];
 		newLayer.move(layerset, ElementPlacement.INSIDE);
 	}
+
+	//test code
+	// $.writeln("***alternate layer deletion strategy for output doc***")
+	var layersHidden = 0;
+	for(var i=0; i<app.activeDocument.artLayers.length; i++) {
+		app.activeDocument.artLayers[i].visible = false;
+		layersHidden++;
+	}
+	if(layersHidden>0) $.writeln("Layers hidden: " + layersHidden);
 
 	app.activeDocument.save();
 
