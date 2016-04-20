@@ -29,8 +29,8 @@ app.preferences.typeUnits = TypeUnits.PIXELS;
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 var hideAllLayerSets = function(doc) {
-	for(var i =0; i<doc.layerSets.length; i++) {
-		doc.layerSets[i].visible = false;
+	for(var i =0; i<doc.layers.length; i++) {
+		doc.layers[i].visible = false;
 	}
 };
 
@@ -147,13 +147,13 @@ var doResizeAndOutput = function(location, config) {
 			//set all other layers to hidden
 			//set this layer to visible
 			//export using layer name as part of the path
-			for(var i = 0; i<activeDocument.layerSets.length; i++) {
+			for(var i = 0; i<activeDocument.layers.length; i++) {
 				//valid layer names must contain a dash
-				if(activeDocument.layerSets[i].name.indexOf("-")>-1){
+				if(activeDocument.layers[i].name.indexOf("-")>-1){
 
 					hideAllLayerSets(activeDocument);
-					activeDocument.layerSets[i].visible = true;
-					var propertyName = activeDocument.layerSets[i].name;
+					activeDocument.layers[i].visible = true;
+					var propertyName = activeDocument.layers[i].name;
 					processDocument(config, propertyName, activeDocument, options);
 
 				}

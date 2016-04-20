@@ -1,4 +1,3 @@
-
 //set unit preferences
 var strtRulerUnits = app.preferences.rulerUnits;
 var strtTypeUnits = app.preferences.typeUnits;
@@ -70,14 +69,14 @@ var smartProcess = function(config){
 	//place temp input files
 	for(var i = 0; i<layerSetCount; i++) {
 		var newLayer = PlaceFile(new File(tempPath+ "tmp-"+layerSets[i]+".psd"));
-
-		var layerset = app.activeDocument.layerSets.add();
-		layerset.name = layerSets[i];
-		newLayer.move(layerset, ElementPlacement.INSIDE);
-		$.writeln("MOVE DEBUG: moved "+newLayer.name+" aka tmp-"+layerSets[i]+".psd into "+layerset.name);
-		if(app.activeDocument.artLayers.length>1) {
-			confirm("problem")
-		}
+          newLayer.name = layerSets[i];
+	  /* var layerset = app.activeDocument.layerSets.add();
+	     layerset.name =
+	     newLayer.move(layerset, ElementPlacement.INSIDE);
+	     $.writeln("MOVE DEBUG: moved "+newLayer.name+" aka tmp-"+layerSets[i]+".psd into "+layerset.name);
+	     if(app.activeDocument.artLayers.length>1) {
+	     confirm("problem")
+	     } */
 	}
 
 
@@ -99,7 +98,7 @@ var smartProcess = function(config){
 		app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 		app.open(new File(outputFilePath));
 
-		
+
 	doResizeAndOutput(outputFilePath,config);
 
 }
