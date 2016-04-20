@@ -21,7 +21,7 @@ var smartProcess = function(config){
 	var layerSets = [];
 	//generate a clean list of layerset names
 	for(var i = 0; i<app.activeDocument.layerSets.length; i++) {
-		if(app.activeDocument.layerSets[i].name.indexOf("-")>-1) {
+		if(app.activeDocument.layerSets[i].name.indexOf("+")==0) {
 			layerSets.push(app.activeDocument.layerSets[i].name);
 		}
 	}

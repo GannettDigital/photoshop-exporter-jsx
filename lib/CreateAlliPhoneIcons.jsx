@@ -47,6 +47,7 @@ var useFolder = function(path) {
 };
 
 var processDocument = function(config, propertyName, activeDocument, options) {
+	propertyName = propertyName.replace(/\+/,"");
 	for(var j in config.sizes) {
 		var historyStateCounter = 0;
 
@@ -73,7 +74,7 @@ var processDocument = function(config, propertyName, activeDocument, options) {
 
 		//autocrop if enabled for asset type
 		if(("autocrop" in config)&&(config.autocrop === true)) {
-			activeDocument.activeLayer = activeDocument.layerSets.getByName(propertyName);
+			activeDocument.activeLayer = activeDocument.layers.getByName(propertyName);
 			activeDocument.resizeCanvas(activeDocument.activeLayer.bounds[2],config.sizes[j].y,AnchorPosition.MIDDLELEFT);
 			$.writeln("autocrop enabled, cropped to: "+activeDocument.activeLayer.bounds[2]+","+config.sizes[j].y);
 			$.writeln("details for autocrop:"+activeDocument.activeLayer.bounds.join(",")+" "+activeDocument.activeLayer.name);
