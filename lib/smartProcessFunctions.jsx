@@ -4,6 +4,12 @@ var hideAllLayerSets = function(doc) {
 	}
 };
 
+var hideAllLayers = function(doc) {
+	for(var i =0; i<doc.layers.length; i++) {
+		doc.layers[i].visible = false;
+	}
+};
+
 var useFolder = function(path) {
 	path = path.replace('//','/');
 	var outputFolder = new Folder(path);

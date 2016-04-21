@@ -83,9 +83,13 @@ var smartProcess = function(config){
 	//test code
 	// $.writeln("***alternate layer deletion strategy for output doc***")
 	var layersHidden = 0;
-	for(var i=0; i<app.activeDocument.artLayers.length; i++) {
-		app.activeDocument.artLayers[i].visible = false;
-		layersHidden++;
+	if(app.activeDocument.artLayers.length>1){
+		for(var i=0; i<app.activeDocument.artLayers.length; i++) {
+			app.activeDocument.artLayers[i].visible = false;
+			layersHidden++;
+		}
+	} else {
+		$.writeln("no current artlayers other than Background");
 	}
 	if(layersHidden>0) $.writeln("Layers hidden: " + layersHidden);
 
