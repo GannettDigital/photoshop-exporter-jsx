@@ -132,7 +132,7 @@ The `sizes` array takes a few required and _optional_ properties in each of its 
 ```
 
 ##TODO
-- [] Update Readme to reflect api changes
+- [ ] Update Readme to reflect api changes
 
 ###Credits
 Based on the work by [John Ballinger](https://twitter.com/sponno), who released the [original script](https://github.com/sponno/iPhone-Photoshop-JSX-Icon-Exporter) under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
