@@ -151,7 +151,7 @@ var doResizeAndOutput = function(location, config) {
 			//export using layer name as part of the path
 			for(var i = 0; i<activeDocument.layers.length; i++) {
 				//valid layer names must contain a dash
-				if(activeDocument.layers[i].name.indexOf("-")>-1){
+				if(activeDocument.layers[i].name.indexOf("+")>-1){
 
 					hideAllLayerSets(activeDocument);
 					activeDocument.layers[i].visible = true;

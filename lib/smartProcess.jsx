@@ -102,7 +102,7 @@ var smartProcess = function(config){
 		app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 		app.open(new File(outputFilePath));
 
-
+		$.writeln("about to resize:" + outputFilePath);
 	doResizeAndOutput(outputFilePath,config);
 
 }
