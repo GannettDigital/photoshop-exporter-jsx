@@ -14,18 +14,22 @@ While this script was primarily authored for use in helping to generate icons an
 * Solves for numerous Photoshop bugs with hilarious workarounds
 
 
-###Table of Contents
+###Table of Contents for Designers
+- [Introduction](#introduction)
 - [Usage](#usage)
+
+###Technical Table of Contents
 - [Minimal example](#minimal-configuration-object-syntax)
 - [Simple usage](#simple-example-execution-script)
 - [Full configuration spec](#full-object-configuration-options)
 - [Credits](#credits)
 
-###Usage
+###Introduction
 There are a number of ways to launch the script. The most straight forward, while not the fastest, is from Photoshop: select the script from `File->Scripts->Browse...`, browse to smart-selection.jsx, and select OK. Alternatively, the smart-selection.jsx script can be dragged onto the Photoshop icon in OS X's dock, which is faster but slightly more cumbersome.
 
 Once the script is launched, there are 3 steps: Select which folder to process files from, select where to put the output, and choose a file (or files) to process.
 
+###Usage
 1. Select an input folder. This should be where the .psd documents are located that should be processed. *Note*: you do not select a specific file at this step.
 ![Select input folder](documentation/images/input.png)
 2. Select an output folder. This is the base folder where files should be output to.
@@ -38,6 +42,15 @@ Once you select the appropriate file(s) to process, the script runs for an indef
 The script outputs files based on rules in the configuration for each file, contained in the smart-selection.jsx file. New configurations can be added there, as per the technical documentation below.
 
 -------------
+
+##Technical Introduction
+There are three core files that are used to create the image processing experience: smart-selection.jsx, smartProcess.jsx and CreateAlliPhoneIcons.jsx.
+* **smart-selection.jsx**: The configuration interface into the library. Under normal use-cases, any changes to how the library is used should be done in this script. It lists valid files that can be processed, lists a series of configurations for both iOS and Android for each valid file type, and triggers the UI selection process and subsequent file processing steps.
+* **smartProcess.jsx**: This file takes a source file, prepares it for processing, and eventually triggers the processing.
+* **CreateAlliPhoneIcons.jsx**: This file contains the image output settings, and actually does the image processing.
+
+
+
 
 ###Minimal Configuration Object Syntax
 This configuration will save a 76x76 image called `Icon-76.png` in a folder `./iOS/square` relative to the source psd.
