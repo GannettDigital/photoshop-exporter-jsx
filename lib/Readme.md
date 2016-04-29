@@ -1,6 +1,5 @@
-#Configuration-Driven Exports
+NOTE: This readme is applicable only for the functions contained within CreateAlliPhoneIcons.jsx. Most of the core functionality has been moved to smartProcess.jsx, and the main Readme.
 
-##Icon export script for Adobe Photoshop
 
 ###Table of Contents
 - [Usage](#usage)
