@@ -21,10 +21,23 @@ While this script was primarily authored for use in helping to generate icons an
 - [Full configuration spec](#full-object-configuration-options)
 - [Credits](#credits)
 
-![Photoshop Dialog](documentation/images/interface.png)
-
 ###Usage
-From Photoshop, select the script from `File->Scripts->Browse...`, browse to createIcons.jsx, and select OK. Output files based on the configuration will be saved to the folder of the image (TODO: image selection).
+There are a number of ways to launch the script. The most straight forward, while not the fastest, is from Photoshop: select the script from `File->Scripts->Browse...`, browse to smart-selection.jsx, and select OK. Alternatively, the smart-selection.jsx script can be dragged onto the Photoshop icon in OS X's dock, which is faster but slightly more cumbersome.
+
+Once the script is launched, there are 3 steps: Select which folder to process files from, select where to put the output, and choose a file (or files) to process.
+
+1. Select an input folder. This should be where the .psd documents are located that should be processed. *Note*: you do not select a specific file at this step.
+![Select input folder](documentation/images/input.png)
+2. Select an output folder. This is the base folder where files should be output to.
+![Select output folder](documentation/images/output.png)
+3. Choose a file to process, or select "All files." Only valid file names can be selected.
+![Select file(s) to process](documentation/images/interface.png)
+
+Once you select the appropriate file(s) to process, the script runs for an indefinite amount of time. While the script runs, Photoshop cannot be used. Do not be alarmed by distorted or mis-aligned images showing up in Photoshop while it runs, as the script operates faster than the program can re-draw the document art contents in the window.
+
+The script outputs files based on rules in the configuration for each file, contained in the smart-selection.jsx file. New configurations can be added there, as per the technical documentation below.
+
+-------------
 
 ###Minimal Configuration Object Syntax
 This configuration will save a 76x76 image called `Icon-76.png` in a folder `./iOS/square` relative to the source psd.
