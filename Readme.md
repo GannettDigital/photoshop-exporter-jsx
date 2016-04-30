@@ -49,6 +49,31 @@ There are three core files that are used to create the image processing experien
 * **smartProcess.jsx**: This file takes a source file, prepares it for processing, and eventually triggers the processing.
 * **CreateAlliPhoneIcons.jsx**: This file contains the image output settings, and actually does the image processing.
 
+###Simple example
+For the following example, assume there is a PSD that has an aspect ratio of 2:1.
+```javascript
+//documentation/examples/simple.jsx
+
+smartProcess({
+  "inputFile":"~/projects/fancyApp/icon.psd",
+  "outputBaseFolder":"~/projects/fancyApp/build/"
+  "outputFolder": "iOS",
+  "traverseLayers":true,
+  "sizes":[
+    {"x":100,"y":50,"name":"sample.png"},
+    {"x":200,"y":100,"name":"sample@2x.png"}
+  ]
+});
+```
+The output of this script would be the following folder/file structure:
+```
+~/projects
+  |--fancyApp
+    |--build
+      |--iOS
+        |--sample.png //100x50px
+        |--sample@2x.png //200x100px
+```
 
 
 
