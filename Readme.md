@@ -2,6 +2,8 @@
 
 ##Highly configurable export scripting utility for Adobe Photoshop
 
+The necessity of supporting multiple different digital properties with common assets can be daunting, especially as the number of properties one has to manage increases. Various solutions in Photoshop already exist, for example using the built-in [Generator](https://helpx.adobe.com/photoshop/using/generate-assets-layers.html), but these solutions require complex layer names that detract from the fluid process of managing layers and structure within documents. This script facilitates creating simple ExtendScript JSX configurations for outputting numerous files efficiently, with only a single [layer naming convention](#layer-structure).
+
 While this script was primarily authored for use in helping to generate icons and assets for native application usage, the general concepts and utilities are applicable to any scenario where mutliple sizes of the same asset are required.
 
 ##Core features
@@ -140,11 +142,6 @@ The **sizes** array takes a few required and _optional_ properties in each of it
   "traverseLayers":true //traverse the layer folder sets of a document, and output a set of files per layer set
 }
 ```
-
-##TODO
-- [x] Update Readme to reflect api changes
-- [x] Update TOC
-- [x] Add layer convention section
 
 ###Credits
 Written by [Erin Sparling](http://erinsparling.com), based on the work by [John Ballinger](https://twitter.com/sponno), who released the [original script](https://github.com/sponno/iPhone-Photoshop-JSX-Icon-Exporter) under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
