@@ -50,31 +50,50 @@ There are three core files that are used to create the image processing experien
 * **CreateAlliPhoneIcons.jsx**: This file contains the image output settings, and actually does the image processing.
 
 ###Simple example
-For the following example, assume there is a PSD that has an aspect ratio of 2:1.
+For the following example, assume there is a PSD that has an aspect ratio of 2:1. The layer structure guidelines need to be observed as per the example file, illustrated in this screenshot:
+![Select input folder](documentation/images/layers.png)
+
 ```javascript
 //documentation/examples/simple.jsx
 
+#include "../../lib/smartProcess.jsx";
+
 smartProcess({
-  "inputFile":"~/projects/fancyApp/icon.psd",
-  "outputBaseFolder":"~/projects/fancyApp/build/"
+  "inputFile":"~/photoshop-exporter-jsx/documentation/examples/icon@3x.psd",
+  "outputBaseFolder":"~/projects/fancyApp/build/",
+	"confirm":false,
   "outputFolder": "iOS",
   "traverseLayers":true,
   "sizes":[
-    {"x":100,"y":50,"name":"sample.png"},
-    {"x":200,"y":100,"name":"sample@2x.png"}
+		{"x":100,"y":50,"name":"sample.png"},
+		{"x":200,"y":100,"name":"sample@2x.png"},
+		{"x":400,"y":200,"name":"sample@3x.png"}
   ]
 });
 ```
+
 The output of this script would be the following folder/file structure:
 ```
 ~/projects
   |--fancyApp
     |--build
-      |--iOS
-        |--sample.png //100x50px
-        |--sample@2x.png //200x100px
+      |--black
+        |--iOS
+          |--sample.png     //100x50px
+          |--sample@2x.png  //200x100px
+          |--sample@3x.png  //400x100px
+      |--default
+        |--iOS
+          |--sample.png     //100x50px
+          |--sample@2x.png  //200x100px
+          |--sample@3x.png  //400x100px
+      |--transparent
+        |--iOS
+          |--sample.png     //100x50px
+          |--sample@2x.png  //200x100px
+          |--sample@3x.png  //400x100px          
 ```
-
+Any folders in the hierarchy will be created automatically if they don't already exist.
 
 
 ###Minimal Configuration Object Syntax
