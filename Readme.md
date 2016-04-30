@@ -17,10 +17,10 @@ While this script was primarily authored for use in helping to generate icons an
 ###Table of Contents for Designers
 - [Introduction](#introduction)
 - [Usage](#usage)
+- [Layer Structure for Photoshop Documents](#layer-structure)
 
 ###Technical Table of Contents
-- [Minimal example](#minimal-configuration-object-syntax)
-- [Simple usage](#simple-example-execution-script)
+- [Simple usage](#simple-example)
 - [Full configuration spec](#full-object-configuration-options)
 - [Credits](#credits)
 
@@ -40,6 +40,16 @@ Once the script is launched, there are 3 steps: Select which folder to process f
 Once you select the appropriate file(s) to process, the script runs for an indefinite amount of time. While the script runs, Photoshop cannot be used. Do not be alarmed by distorted or mis-aligned images showing up in Photoshop while it runs, as the script operates faster than the program can re-draw the document art contents in the window.
 
 The script outputs files based on rules in the configuration for each file, contained in the smart-selection.jsx file. New configurations can be added there, as per the technical documentation below.
+
+###Layer Structure
+Rules and assumptions for photoshop documents to be processed:
+1. Documents to be processed contain layer sets (aka folders).
+2. Each layer set contains assets, which can include type layers, smart objects, layer styles, raster layers, etc. Basically anything.
+3. **Only** layer sets that begin with a `+` will be processed. Documents can contain any number of other layers or layer sets, but they will all be ignored.
+4. Each layer set should be a product or distinct variation of the output. While the output folder structure can be configured via config object passed to the script to process, the layer set name is used as part of the path. See the [technical introduction](#technical-introduction) for more information on how the various base folder / layer set name / sub-folder options are combined.
+
+![Select input folder](documentation/images/layers.png)
+This sample PSD is contained in the examples folder of this repository.
 
 -------------
 
@@ -133,8 +143,8 @@ The **sizes** array takes a few required and _optional_ properties in each of it
 
 ##TODO
 - [x] Update Readme to reflect api changes
-- [ ] Update TOC
-- [ ] Add layer convention section
+- [x] Update TOC
+- [x] Add layer convention section
 
 ###Credits
 Written by [Erin Sparling](http://erinsparling.com), based on the work by [John Ballinger](https://twitter.com/sponno), who released the [original script](https://github.com/sponno/iPhone-Photoshop-JSX-Icon-Exporter) under the [Creative Commons Attribution 3.0 New Zealand License](http://creativecommons.org/licenses/by/3.0/nz/)
