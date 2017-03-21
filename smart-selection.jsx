@@ -1,8 +1,8 @@
 //load library
-﻿#include "lib/smartProcess.jsx";
+#include "lib/smartProcess.jsx";
 #include "lib/displaySelectionUI.jsx";
 
-var validFiles = ["iTunesArtwork.psd","LaunchPad.psd","LaunchPhone.psd","logo_dark.psd","logo_white.psd","feature_graphic.psd","logo_onboarding.psd"];
+var validFiles = ["iTunesArtwork.psd","LaunchPad.psd","LaunchPhone.psd","logo_dark.psd","logo_white.psd","feature_graphic.psd","logo_onboarding.psd", "notification_icon.psd", "site-masthead-logo-dark.psd", "site-nav-logo-dark.psd", "footer-logo@2x.psd" ];
 
 var userSelections = displaySelectionUI(validFiles);
 
@@ -23,6 +23,14 @@ var generateConfigs = function(file) {
 		"outputFolder":"Android",
 		"traverseLayers":true
 	};
+    
+    var configDesktop = {
+		"inputFile":userSelections.userInputFolder + "/" + userSelections.file,
+		"confirm":false,
+		"outputBaseFolder":userSelections.userOutputFolder,
+		"outputFolder":"Desktop",
+		"traverseLayers":true
+    }
 
 	if(file === "iTunesArtwork.psd") {
 
@@ -126,6 +134,36 @@ var generateConfigs = function(file) {
 		];
 
 		return [configiOS, configAndroid];
+	} else if (file === "notification_icon.psd") {
+		configAndroid.sizes = [
+			{"x":60,"y":60,"name":"notification_icon.png","subFolder":"drawable-hdpi"},
+			{"x":80,"y":80,"name":"notification_icon.png","subFolder":"drawable-xhdpi"},
+			{"x":120,"y":120,"name":"notification_icon.png","subFolder":"drawable-xxhdpi"},
+			{"x":160,"y":160,"name":"notification_icon.png","subFolder":"drawable-xxxhdpi"}
+
+		];
+		
+		return [configAndroid];
+	} else if(file === "site-masthead-logo-dark.psd") {
+		configDesktop.sizes = [
+			{"x":800,"y":160,"name":"site-masthead-logo-dark@2x.png"}
+		];
+		configDesktop.autocrop = true;
+		return [configDesktop];
+
+	} else if(file === "site-nav-logo-dark.psd") {
+		configDesktop.sizes = [
+			{"x":500,"y":80,"name":"site-nav-logo-dark@2x.png"},
+		];
+		configDesktop.autocrop = true;
+		return [configDesktop];
+
+	} else if(file === "footer-logo.psd") {
+		configDesktop.sizes = [
+			{"x":720,"y":144,"name":"footer-logo@2x.png"},
+		];
+		return [configDesktop];
+
 	} else {
 		return false;
 	}
