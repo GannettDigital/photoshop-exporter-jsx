@@ -2,7 +2,7 @@
 #include "lib/smartProcess.jsx";
 #include "lib/displaySelectionUI.jsx";
 
-var validFiles = ["iTunesArtwork.psd", "LaunchPad.psd", "LaunchPhone.psd", "logo_dark.psd", "logo_white.psd", "feature_graphic.psd", "logo_onboarding.psd", "notification_icon.psd", "site-masthead-logo-dark.psd", "site-nav-logo-dark.psd", "footer-logo@2x.psd"];
+var validFiles = ["iTunesArtwork.psd", "LaunchPad.psd", "LaunchPhone.psd", "logo_dark.psd", "logo_white.psd", "feature_graphic.psd", "logo_onboarding.psd", "notification_icon.psd", "site-masthead-logo.psd", "site-nav-logo-dark.psd", "footer-logo@2x.psd"];
 
 var userSelections = displaySelectionUI(validFiles);
 
@@ -32,6 +32,30 @@ var generateConfigs = function (file) {
         "traverseLayers": true
     }
 
+    var configMobileWeb = {
+        "inputFile": userSelections.userInputFolder + "/" + userSelections.file,
+        "confirm": false,
+        "outputBaseFolder": userSelections.userOutputFolder,
+        "outputFolder": "MobileWeb",
+        "traverseLayers": true
+    }
+
+    var configAmazon = {
+        "inputFile": userSelections.userInputFolder + "/" + userSelections.file,
+        "confirm": false,
+        "outputBaseFolder": userSelections.userOutputFolder,
+        "outputFolder": "Amazon",
+        "traverseLayers": true
+    }
+
+    var configSam = {
+        "inputFile": userSelections.userInputFolder + "/" + userSelections.file,
+        "confirm": false,
+        "outputBaseFolder": userSelections.userOutputFolder,
+        "outputFolder": "SAM",
+        "traverseLayers": true
+    }
+
     if (file === "iTunesArtwork.psd") {
 
         configiOS.sizes = [
@@ -52,24 +76,23 @@ var generateConfigs = function (file) {
         configAndroid.sizes = [
             {"x": 64, "y": 64, "name": "icon.png", "subFolder": "drawable-hdpi", "canvasSize": {"x": 72, "y": 72}},
             {"x": 84, "y": 84, "name": "icon.png", "subFolder": "drawable-xhdpi", "canvasSize": {"x": 96, "y": 96}},
-            {
-                "x": 128,
-                "y": 128,
-                "name": "icon.png",
-                "subFolder": "drawable-xxhdpi",
-                "canvasSize": {"x": 144, "y": 144}
-            },
-            {
-                "x": 168,
-                "y": 168,
-                "name": "icon.png",
-                "subFolder": "drawable-xxxhdpi",
-                "canvasSize": {"x": 192, "y": 192}
-            },
+            {"x": 128, "y": 128, "name": "icon.png", "subFolder": "drawable-xxhdpi", "canvasSize": {"x": 144, "y": 144}},
+            {"x": 168, "y": 168, "name": "icon.png", "subFolder": "drawable-xxxhdpi", "canvasSize": {"x": 192, "y": 192}},
             {"x": 512, "y": 512, "name": "GooglePlayIcon.png"}
         ];
 
-        return [configiOS, configAndroid];
+        configMobileWeb.sizes = [
+            {"x": 114, "y": 114, "name": "native-ios-114.png"},
+            {"x": 65, "y": 65, "name": "android-icon.png"},
+            {"x": 130, "y": 130, "name": "android-icon@2x.png"}
+        ];
+
+        configAmazon.sizes = [
+            {"x": 108, "y": 108, "name": "icon-108.png"},
+            {"x": 512, "y": 512, "name": "icon-512.png"}
+        ];
+
+        return [configiOS, configAndroid, configMobileWeb, configAmazon];
 
     } else if (file === "LaunchPad.psd") {
         configiOS.sizes = [
@@ -101,7 +124,20 @@ var generateConfigs = function (file) {
             {"x": 510, "y": 96, "name": "logo_dark@3x.png"}
         ];
         configiOS.autocrop = true;
-        return [configiOS];
+
+
+        configMobileWeb.sizes = [
+            {"x": 160, "y": 30, "name": "logo-main.png"},
+            {"x": 320, "y": 60, "name": "logo-main2x.png"}
+        ];
+
+        configSam.sizes = [
+            {"x": 133, "y": 25, "name": "logo_sm.png"},
+            {"x": 133, "y": 25, "name": "logo_sm_dark.png"},
+            {"x": 266, "y": 50, "name": "logo_sm@2x.png"}
+        ];
+
+        return [configiOS, configSam, configMobileWeb];
 
     } else if (file === "logo_white.psd") {
         configiOS.sizes = [
@@ -125,7 +161,14 @@ var generateConfigs = function (file) {
             {"x": 224, "y": 42, "name": "widget_header.png", "subFolder": "drawable-xxhdpi"},
             {"x": 298, "y": 56, "name": "widget_header.png", "subFolder": "drawable-xxxhdpi"}
         ];
-        return [configiOS, configAndroid];
+
+        configSam.sizes = [
+            {"x": 133, "y": 25, "name": "logo_sm_white.png"},
+            {"x": 266, "y": 50, "name": "logo_sm_white@2x.png"}
+            {"x": 426, "y": 80, "name": "logo_sm_white_40h@2x.png"}
+        ];
+
+        return [configiOS, configAndroid, configSam];
     } else if (file === "feature_graphic.psd") {
         configAndroid.sizes = [
             {"x": 1024, "y": 500, "name": "feature_graphic.png"}
@@ -152,13 +195,20 @@ var generateConfigs = function (file) {
             {"x": 80, "y": 80, "name": "notification_icon.png", "subFolder": "drawable-xhdpi"},
             {"x": 120, "y": 120, "name": "notification_icon.png", "subFolder": "drawable-xxhdpi"},
             {"x": 160, "y": 160, "name": "notification_icon.png", "subFolder": "drawable-xxxhdpi"}
-
         ];
 
-        return [configAndroid];
-    } else if (file === "site-masthead-logo-dark.psd") {
         configDesktop.sizes = [
-            {"x": 800, "y": 160, "name": "site-masthead-logo-dark@2x.png"}
+            {"x": 32, "y": 32, "name": "favicon.png"},
+            {"x": 16, "y": 16, "name": "favicon-16.png"},
+            {"x": 32, "y": 32, "name": "favicon-32.png"},
+            {"x": 64, "y": 64, "name": "favicon-64.png"}
+        ]
+
+        return [configAndroid, configDesktop];
+    } else if (file === "site-masthead-logo.psd") {
+        configDesktop.sizes = [
+            {"x": 800, "y": 160, "name": "site-masthead-logo@2x.png"},
+            {"x": 400, "y": 80, "name": "site-masthead-logo.png"}
         ];
         configDesktop.autocrop = true;
         return [configDesktop];
@@ -172,7 +222,8 @@ var generateConfigs = function (file) {
 
     } else if (file === "footer-logo.psd") {
         configDesktop.sizes = [
-            {"x": 720, "y": 144, "name": "footer-logo@2x.png"},
+            {"x": 360, "y": 54, "name": "footer-logo.png"},
+            {"x": 720, "y": 108, "name": "footer-logo@2x.png"}
         ];
         return [configDesktop];
 
