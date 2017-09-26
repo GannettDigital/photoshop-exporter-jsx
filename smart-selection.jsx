@@ -164,7 +164,7 @@ var generateConfigs = function (file) {
 
         configSam.sizes = [
             {"x": 133, "y": 25, "name": "logo_sm_white.png"},
-            {"x": 266, "y": 50, "name": "logo_sm_white@2x.png"}
+            {"x": 266, "y": 50, "name": "logo_sm_white@2x.png"},
             {"x": 426, "y": 80, "name": "logo_sm_white_40h@2x.png"}
         ];
 
